@@ -454,14 +454,18 @@ function filterDusun(d) {
 function onDusunSelect() {
   const val = document.getElementById('filter-dusun').value;
   activeDusun = val ? parseInt(val) : 0;
+  // toggle dusun cards on dashboard (may not exist when called from data page)
   for (let i=0;i<=4;i++) {
-    document.getElementById('dcard-'+i).classList.toggle('aktif', i===activeDusun);
+    var card = document.getElementById('dcard-'+i);
+    if (card) card.classList.toggle('aktif', i===activeDusun);
   }
   document.getElementById('filter-rw').value = '';
   document.getElementById('filter-rt').innerHTML = '<option value="">Semua RT</option>';
   populateRwByDusun(activeDusun);
   applyFilter();
-  updateHeroRupiah();
+  // update hero only if on dashboard page
+  var hr = document.getElementById('hero-rupiah');
+  if (hr) updateHeroRupiah();
 }
 
 function populateRwByDusun(d) {
