@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generator Surat PBB — Desa Kasomalang Kulon</title>
+<title>Tunggakan PBB 2020 - 2025 — Desa Kasomalang Kulon</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -53,7 +53,7 @@ header{background:var(--h);color:#fff;border-bottom:4px solid var(--g)}
 
 /* ===== DUSUN TABS ===== */
 .dusun-strip{background:var(--h2);border-bottom:1px solid rgba(255,255,255,.1)}
-.dusun-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.dusun-inner{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr)}
 .dcard{
   padding:14px 20px;cursor:pointer;transition:background .15s;
   border-right:1px solid rgba(255,255,255,.1);position:relative
@@ -256,7 +256,7 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--h2
   .m2col{grid-template-columns:1fr}
   .mform{border-right:none;border-bottom:1px solid var(--br);max-height:45vh}
   .mprev{max-height:50vh}
-  .dcard:nth-child(2n){border-right:none}
+  .dcard:nth-child(3n){border-right:none}
   .dcard:nth-child(3),.dcard:nth-child(4){border-top:1px solid rgba(255,255,255,.1)}
 }
 @media(max-width:520px){
@@ -272,10 +272,10 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--h2
 <div class="hd">
   <div class="hd-logo">🏛️</div>
   <div class="hd-text">
-    <h1>Generator Surat PBB — Desa Kasomalang Kulon</h1>
-    <p>Kecamatan Kasomalang · Kabupaten Subang · Tahun 2025</p>
+    <h1>Tunggakan PBB 2020 - 2025 — Desa Kasomalang Kulon</h1>
+    <p>Kecamatan Kasomalang · Kabupaten Subang</p>
   </div>
-  <div class="hd-badge">BAPENDA 2025</div>
+  <div class="hd-badge">SAUYUNAN 2020 - 2025</div>
 </div>
 </header>
 
@@ -328,6 +328,12 @@ input[type=checkbox]{width:14px;height:14px;cursor:pointer;accent-color:var(--h2
     <div class="dcard-rw">RW 04 · RW 05 · RW 07</div>
     <div class="dcard-n" id="dn-3">—</div>
     <div class="dcard-rp" id="dr-3">—</div>
+  </div>
+  <div class="dcard" id="dc-luar" onclick="setDusun('luar')">
+    <div class="dcard-name">🔹 Luar Desa</div>
+    <div class="dcard-rw">Alamat tidak terdata</div>
+    <div class="dcard-n" id="dn-luar">—</div>
+    <div class="dcard-rp" id="dr-luar">—</div>
   </div>
 </div>
 </div>
@@ -492,6 +498,7 @@ function counter(el,to,isRp,dur){
 /* ---- SUBSET ---- */
 function subsetForDusun(d){
   if(d===0) return PBB_DATA;
+  if(d==='luar') return PBB_DATA.filter(x=>x.rw==='luar');
   return PBB_DATA.filter(x=>getDusun(x.rw)===d);
 }
 
@@ -566,12 +573,19 @@ function initDusunCards(){
     document.getElementById('dn-'+d).textContent=sub.length.toLocaleString('id-ID')+' WP';
     document.getElementById('dr-'+d).textContent=rp(total);
   }
+  // Luar
+  const subLuar=PBB_DATA.filter(x=>x.rw==='luar');
+  const totLuar=subLuar.reduce((s,x)=>s+x.total,0);
+  document.getElementById('dn-luar').textContent=subLuar.length.toLocaleString('id-ID')+' WP';
+  document.getElementById('dr-luar').textContent=rp(totLuar);
 }
 
 function setDusun(d){
   activeDusun=d;
+  // update card UI
   for(let i=0;i<=3;i++) document.getElementById('dc-'+i).classList.toggle('on',i===d);
-  document.getElementById('f-dusun').value=d===0?'':String(d);
+  document.getElementById('dc-luar').classList.toggle('on',d==='luar');
+  document.getElementById('f-dusun').value=(d===0||d==='luar')?'':String(d);
 
   // animate hero big numbers
   const sub=subsetForDusun(d);
@@ -580,7 +594,7 @@ function setDusun(d){
   counter(document.getElementById('h-rp'),tot,true,1000);
 
   // update sub labels
-  const dName=d===0?'desa':['','Dusun I','Dusun II','Dusun III'][d];
+  const dName=d===0?'desa':d==='luar'?'Luar Desa':['','Dusun I','Dusun II','Dusun III'][d];
   document.getElementById('h-wp-sub').textContent=d===0?'Belum melunasi PBB':'Belum lunas di '+dName;
   document.getElementById('h-rp-sub').textContent=d===0?'Seluruh data desa':'Total tunggakan '+dName;
 
@@ -598,10 +612,14 @@ function onDusunSel(){
   setDusun(v?+v:0);
 }
 
+
 function populateRwSel(d){
   const sel=document.getElementById('f-rw');
   sel.innerHTML='<option value="">Semua RW</option>';
-  let rwList=d===0?['1','2','3','4','5','6','7','luar']:([...DUSUN_RW[d],'luar']);
+  let rwList;
+  if(d===0) rwList=['1','2','3','4','5','6','7','luar'];
+  else if(d==='luar') rwList=['luar'];
+  else rwList=[...DUSUN_RW[d]];
   rwList.forEach(r=>{
     const o=document.createElement('option');
     o.value=r;o.textContent=r==='luar'?'Luar Desa':'RW '+r;
@@ -638,7 +656,7 @@ function applyFilter(){
   filtered=PBB_DATA.filter(d=>{
     if(cn&&!d.nama.toLowerCase().includes(cn)) return false;
     if(cs&&!d.nop.toLowerCase().includes(cs)) return false;
-    if(activeDusun&&getDusun(d.rw)!==activeDusun) return false;
+    if(activeDusun&&activeDusun!==0){if(activeDusun==='luar'){if(d.rw!=='luar') return false;}else{if(getDusun(d.rw)!==activeDusun) return false;}} 
     if(rw&&d.rw!==rw) return false;
     if(rt&&d.rt!==rt) return false;
     if(th&&!d.tunggakan[th]) return false;
@@ -650,7 +668,7 @@ function applyFilter(){
   // active tags
   const bar=document.getElementById('f-active');
   const tags=[];
-  if(activeDusun) tags.push(['Dusun '+['','I','II','III'][activeDusun],()=>setDusun(0)]);
+  if(activeDusun) tags.push([activeDusun==='luar'?'Luar Desa':'Dusun '+['','I','II','III'][activeDusun],()=>setDusun(0)]);
   if(rw) tags.push([rw==='luar'?'Luar Desa':'RW '+rw,()=>{document.getElementById('f-rw').value='';updateRtSel();applyFilter()}]);
   if(rt) tags.push([rt==='luar'?'Luar':'RT '+rt,()=>{document.getElementById('f-rt').value='';applyFilter()}]);
   if(th) tags.push(['Thn '+th,()=>{document.getElementById('f-tahun').value='';applyFilter()}]);
