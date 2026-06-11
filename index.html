@@ -1161,10 +1161,13 @@ function cetakBatch(tipe) {
 
 // ===== PAGE NAVIGATION =====
 function showPage(page) {
-  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('ak')});
+  // Use inline display to avoid CSS stylesheet specificity issues
+  document.querySelectorAll('.pg').forEach(function(p){p.style.display='none'});
   document.querySelectorAll('.nv').forEach(function(t){t.classList.remove('ak')});
-  document.getElementById('page-' + page).classList.add('ak');
-  document.getElementById('tab-' + page).classList.add('ak');
+  var target = document.getElementById('page-' + page);
+  if (target) target.style.display = 'block';
+  var tab = document.getElementById('tab-' + page);
+  if (tab) tab.classList.add('ak');
   if (page === 'dashboard') {
     initDashboard();
   } else {
@@ -1308,6 +1311,9 @@ function gotoData(d) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
+  // Initialize page visibility states
+  document.getElementById('page-dashboard').style.display = 'block';
+  document.getElementById('page-data').style.display = 'none';
   initDashboard();
   applyFilter();
 });
