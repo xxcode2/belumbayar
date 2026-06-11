@@ -271,7 +271,7 @@ input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-colo
       <div class="hero-stat">
         <div class="hero-stat-angka emas" id="hero-rupiah">Rp 0</div>
         <div class="hero-stat-label">Total Tunggakan</div>
-        <div class="hero-stat-sub">Seluruh data desa</div>
+        <div class="hero-stat-sub" id="hero-sub">Seluruh data desa</div>
       </div>
       <div class="hero-divider"></div>
       <div class="hero-stat">
@@ -310,6 +310,12 @@ input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-colo
       <div class="dusun-card-angka" id="dcount-3">—</div>
       <div class="dusun-card-total" id="dtotal-3">—</div>
     </div>
+    <div class="dusun-card" id="dcard-4" onclick="filterDusun(4)">
+      <div class="dusun-card-nama">🌐 Luar</div>
+      <div class="dusun-card-rw">RW 0</div>
+      <div class="dusun-card-angka" id="dcount-4">—</div>
+      <div class="dusun-card-total" id="dtotal-4">—</div>
+    </div>
   </div>
 </div>
 
@@ -325,6 +331,7 @@ input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-colo
       <option value="1">Dusun I (RW 01, 02)</option>
       <option value="2">Dusun II (RW 03, 06)</option>
       <option value="3">Dusun III (RW 04, 05, 07)</option>
+      <option value="4">Luar (RW 0)</option>
     </select>
     <select id="filter-rw" onchange="onRwSelect()">
       <option value="">Semua RW</option>
@@ -465,6 +472,7 @@ const DUSUN_RW = {
 };
 
 function getDusun(rw) {
+  if (rw === '0') return 4; // Luar
   if (DUSUN_RW[1].includes(rw)) return 1;
   if (DUSUN_RW[2].includes(rw)) return 2;
   if (DUSUN_RW[3].includes(rw)) return 3;
@@ -473,6 +481,7 @@ function getDusun(rw) {
 
 function getDusunLabel(rw) {
   const d = getDusun(rw);
+  if (d === 4) return 'Luar';
   return d ? 'Dusun ' + ['','I','II','III'][d] : '—';
 }
 
@@ -484,6 +493,27 @@ let dipilih = new Set();
 let curData = null;
 let batchData = [];
 let activeDusun = 0; // 0 = semua
+
+// ============ HERO STATS UPDATE ============"
+function updateHeroRupiah() {
+  let subset;
+  if (activeDusun === 0) {
+    subset = dataFiltered;
+    document.getElementById('hero-rupiah').textContent = 'Rp 0';
+    document.getElementById('hero-sub').textContent = 'Seluruh data desa';
+    setTimeout(() => animateCounter(document.getElementById('hero-rupiah'), dataFiltered.reduce((s,x)=>s+x.total,0), true, 800), 50);
+  } else if (activeDusun === 4) {
+    subset = dataFiltered.filter(x => x.rw === '0');
+    const total = subset.reduce((s,x)=>s+x.total,0);
+    document.getElementById('hero-sub').textContent = 'Data Luar';
+    setTimeout(() => animateCounter(document.getElementById('hero-rupiah'), total, true, 800), 50);
+  } else {
+    subset = dataFiltered;
+    const total = subset.reduce((s,x)=>s+x.total,0);
+    document.getElementById('hero-sub').textContent = 'Dusun ' + ['','I','II','III'][activeDusun];
+    setTimeout(() => animateCounter(document.getElementById('hero-rupiah'), total, true, 800), 50);
+  }
+}
 
 // ============ UTILS ============
 function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
@@ -522,11 +552,15 @@ function init() {
   setTimeout(() => {
     animateCounter(document.getElementById('hero-jumlah'), PBB_DATA.length, false, 1400);
     animateCounter(document.getElementById('hero-rupiah'), totalRp, true, 1800);
+    animateCounter(document.getElementById('hero-filter'), dataFiltered.length, false, 1200);
   }, 200);
 
   // dusun cards stats
-  for (let d = 0; d <= 3; d++) {
-    const subset = d === 0 ? PBB_DATA : PBB_DATA.filter(x => getDusun(x.rw) === d);
+  for (let d = 0; d <= 4; d++) {
+    let subset;
+    if (d === 0) subset = PBB_DATA;
+    else if (d === 4) subset = PBB_DATA.filter(x => x.rw === '0');
+    else subset = PBB_DATA.filter(x => getDusun(x.rw) === d);
     const count = subset.length;
     const total = subset.reduce((s,x) => s+x.total, 0);
     document.getElementById('dcount-'+d).textContent = count.toLocaleString('id-ID') + ' WP';
@@ -546,7 +580,7 @@ function init() {
 function filterDusun(d) {
   activeDusun = d;
   // update card UI
-  for (let i=0;i<=3;i++) {
+  for (let i=0;i<=4;i++) {
     document.getElementById('dcard-'+i).classList.toggle('aktif', i===d);
   }
   // set select
@@ -556,18 +590,20 @@ function filterDusun(d) {
   document.getElementById('filter-rt').innerHTML = '<option value="">Semua RT</option>';
   populateRwByDusun(d);
   applyFilter();
+  updateHeroRupiah();
 }
 
 function onDusunSelect() {
   const val = document.getElementById('filter-dusun').value;
   activeDusun = val ? parseInt(val) : 0;
-  for (let i=0;i<=3;i++) {
+  for (let i=0;i<=4;i++) {
     document.getElementById('dcard-'+i).classList.toggle('aktif', i===activeDusun);
   }
   document.getElementById('filter-rw').value = '';
   document.getElementById('filter-rt').innerHTML = '<option value="">Semua RT</option>';
   populateRwByDusun(activeDusun);
   applyFilter();
+  updateHeroRupiah();
 }
 
 function populateRwByDusun(d) {
@@ -577,6 +613,9 @@ function populateRwByDusun(d) {
   let rwList;
   if (d === 0) {
     rwList = [...new Set(PBB_DATA.map(x=>x.rw).filter(r=>r!=='0'))].sort((a,b)=>+a-+b);
+  } else if (d === 4) {
+    // Luar — no RW sub-filter needed
+    return;
   } else {
     rwList = DUSUN_RW[d];
   }
@@ -608,7 +647,8 @@ function applyFilter() {
   dataFiltered = PBB_DATA.filter(d => {
     if (cn && !d.nama.toLowerCase().includes(cn)) return false;
     if (cs && !d.nop.toLowerCase().includes(cs)) return false;
-    if (activeDusun && getDusun(d.rw) !== activeDusun) return false;
+    if (activeDusun === 4 && d.rw !== '0') return false;
+    if (activeDusun > 0 && activeDusun < 4 && getDusun(d.rw) !== activeDusun) return false;
     if (rw && d.rw !== rw) return false;
     if (rt && d.rt !== rt) return false;
     if (th && !d.tunggakan[th]) return false;
@@ -621,7 +661,8 @@ function applyFilter() {
   // active filter bar
   const bar = document.getElementById('filter-active-bar');
   const tags = [];
-  if (activeDusun) tags.push(`Dusun ${['','I','II','III'][activeDusun]}`);
+  if (activeDusun === 4) tags.push('Luar');
+  else if (activeDusun) tags.push(`Dusun ${['','I','II','III'][activeDusun]}`);
   if (rw) tags.push('RW '+rw);
   if (rt) tags.push('RT '+rt);
   if (th) tags.push('Tunggakan '+th);
