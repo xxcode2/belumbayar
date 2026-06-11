@@ -5,438 +5,236 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generator Surat PBB — Desa Kasomalang Kulon</title>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  
-  :root {
-    --hijau: #1a5c3a;
-    --hijau-tua: #0f3a25;
-    --hijau-muda: #e8f4ee;
-    --emas: #c49a28;
-    --emas-muda: #fdf8e8;
-    --teks: #1a1a1a;
-    --abu: #6b7280;
-    --border: #d1d5db;
-    --putih: #ffffff;
-    --merah: #dc2626;
-    --font-utama: 'Segoe UI', system-ui, sans-serif;
-  }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --hijau: #1a5c3a; --hijau-tua: #0f3a25; --hijau-muda: #e8f4ee;
+  --emas: #c49a28; --emas-muda: #fdf8e8; --teks: #1a1a1a;
+  --abu: #6b7280; --border: #d1d5db; --merah: #dc2626;
+}
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #f4f6f4; color: var(--teks); min-height: 100vh; }
 
-  body {
-    font-family: var(--font-utama);
-    background: #f4f6f4;
-    color: var(--teks);
-    min-height: 100vh;
-  }
+/* HEADER */
+header { background: var(--hijau-tua); color: white; border-bottom: 4px solid var(--emas); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 18px 24px; display: flex; align-items: center; gap: 16px; }
+.header-logo { width: 56px; height: 56px; background: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+.header-text h1 { font-size: 1.1rem; font-weight: 700; }
+.header-text p { font-size: 0.78rem; color: #a7c4b5; margin-top: 2px; }
+.header-badge { margin-left: auto; background: var(--emas); color: var(--hijau-tua); padding: 5px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; }
 
-  /* HEADER */
-  header {
-    background: var(--hijau-tua);
-    color: white;
-    padding: 0;
-    border-bottom: 4px solid var(--emas);
-  }
-  .header-inner {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 20px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .header-logo {
-    width: 60px;
-    height: 60px;
-    background: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 28px;
-  }
-  .header-text h1 {
-    font-size: 1.15rem;
-    font-weight: 700;
-    letter-spacing: 0.3px;
-  }
-  .header-text p {
-    font-size: 0.8rem;
-    color: #a7c4b5;
-    margin-top: 2px;
-  }
-  .header-badge {
-    margin-left: auto;
-    background: var(--emas);
-    color: var(--hijau-tua);
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    white-space: nowrap;
-  }
+/* MAIN */
+main { max-width: 1100px; margin: 0 auto; padding: 24px; }
 
-  /* MAIN */
-  main {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 24px;
-  }
+/* STATS */
+.stats-bar { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
+.stat-card { background: white; border-radius: 10px; padding: 16px 20px; border-left: 4px solid var(--hijau); box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.stat-card .angka { font-size: 1.7rem; font-weight: 800; color: var(--hijau); line-height: 1; }
+.stat-card .label { font-size: 0.75rem; color: var(--abu); margin-top: 4px; }
+.stat-card.emas { border-left-color: var(--emas); }
+.stat-card.emas .angka { color: var(--emas); }
 
-  /* STATS BAR */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-  .stat-card {
-    background: white;
-    border-radius: 10px;
-    padding: 16px 20px;
-    border-left: 4px solid var(--hijau);
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  }
-  .stat-card .angka {
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--hijau);
-    line-height: 1;
-  }
-  .stat-card .label {
-    font-size: 0.75rem;
-    color: var(--abu);
-    margin-top: 4px;
-  }
-  .stat-card.emas { border-left-color: var(--emas); }
-  .stat-card.emas .angka { color: var(--emas); }
+/* FILTER */
+.panel-cari { background: white; border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.07); }
+.panel-cari h2 { font-size: 0.8rem; font-weight: 700; color: var(--hijau-tua); text-transform: uppercase; letter-spacing: .8px; margin-bottom: 12px; }
+.filter-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.filter-row input, .filter-row select { flex: 1; min-width: 150px; padding: 9px 13px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 0.88rem; font-family: inherit; outline: none; }
+.filter-row input:focus, .filter-row select:focus { border-color: var(--hijau); }
 
-  /* PANEL CARI */
-  .panel-cari {
-    background: white;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-  }
-  .panel-cari h2 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--hijau-tua);
-    text-transform: uppercase;
-    letter-spacing: 0.8px;
-    margin-bottom: 14px;
-  }
-  .filter-row {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .filter-row input, .filter-row select {
-    flex: 1;
-    min-width: 160px;
-    padding: 10px 14px;
-    border: 1.5px solid var(--border);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  .filter-row input:focus, .filter-row select:focus {
-    border-color: var(--hijau);
-  }
+/* TABLE */
+.panel-tabel { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,.07); margin-bottom: 24px; }
+.tabel-header { background: var(--hijau); color: white; padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.tabel-header span { font-size: 0.85rem; font-weight: 600; }
+.total-terpilih { background: rgba(255,255,255,.2); padding: 4px 12px; border-radius: 12px; font-size: 0.78rem; }
+.btn-cetak-semua { background: var(--emas); color: var(--hijau-tua); border: none; padding: 7px 16px; border-radius: 7px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
+.btn-cetak-semua.hijau { background: rgba(255,255,255,.15); color: white; border: 1px solid rgba(255,255,255,.3); }
+.btn-cetak-semua:hover { opacity: .85; }
+.tabel-scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+thead th { background: #f0f4f1; padding: 10px 14px; text-align: left; font-weight: 700; color: var(--hijau-tua); font-size: 0.73rem; text-transform: uppercase; letter-spacing: .5px; border-bottom: 2px solid var(--border); white-space: nowrap; }
+thead th:first-child { width: 40px; text-align: center; }
+tbody tr { border-bottom: 1px solid #f0f0f0; transition: background .1s; cursor: pointer; }
+tbody tr:hover { background: var(--hijau-muda); }
+tbody tr.dipilih { background: #dff0e8; }
+td { padding: 9px 14px; vertical-align: middle; }
+td:first-child { text-align: center; }
+td.nama { font-weight: 600; }
+td.nop { font-family: monospace; font-size: 0.77rem; color: var(--abu); }
+td.total { font-weight: 700; color: var(--merah); }
+.badge-rt { background: #e8f4ee; color: var(--hijau); padding: 2px 8px; border-radius: 10px; font-size: 0.73rem; font-weight: 600; white-space: nowrap; }
+.tahun-tags { display: flex; gap: 4px; flex-wrap: wrap; }
+.tahun-tag { background: #fff3cd; color: #856404; padding: 2px 7px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; }
+.aksi-btns { display: flex; gap: 6px; }
+.btn-pb, .btn-und { border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.73rem; font-weight: 600; cursor: pointer; white-space: nowrap; transition: all .15s; }
+.btn-pb { background: var(--hijau-muda); color: var(--hijau-tua); }
+.btn-pb:hover { background: var(--hijau); color: white; }
+.btn-und { background: var(--emas-muda); color: #7a5f00; }
+.btn-und:hover { background: var(--emas); color: var(--hijau-tua); }
 
-  /* TABEL */
-  .panel-tabel {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.07);
-    margin-bottom: 24px;
-  }
-  .tabel-header {
-    background: var(--hijau);
-    color: white;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .tabel-header span { font-size: 0.85rem; font-weight: 600; }
-  .tabel-header .total-terpilih {
-    background: rgba(255,255,255,0.2);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.78rem;
-  }
+/* PAGINATION */
+.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 14px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+.pagination button { background: white; border: 1.5px solid var(--border); padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.82rem; transition: all .15s; }
+.pagination button:hover:not(:disabled) { border-color: var(--hijau); color: var(--hijau); }
+.pagination button:disabled { opacity: .35; cursor: not-allowed; }
+.pagination button.aktif { background: var(--hijau); color: white; border-color: var(--hijau); }
+.pagination .info-page { font-size: 0.8rem; color: var(--abu); }
+.empty-state { text-align: center; padding: 48px; color: var(--abu); }
 
-  .btn-cetak-semua {
-    background: var(--emas);
-    color: var(--hijau-tua);
-    border: none;
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 0.82rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.15s;
-  }
-  .btn-cetak-semua:hover { background: #b38920; }
+input[type="checkbox"] { width: 15px; height: 15px; cursor: pointer; accent-color: var(--hijau); }
 
-  .tabel-scroll { overflow-x: auto; }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.84rem;
-  }
-  thead th {
-    background: #f0f4f1;
-    padding: 10px 14px;
-    text-align: left;
-    font-weight: 700;
-    color: var(--hijau-tua);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 2px solid var(--border);
-    white-space: nowrap;
-  }
-  thead th:first-child { width: 40px; text-align: center; }
-  tbody tr {
-    border-bottom: 1px solid #f0f0f0;
-    transition: background 0.1s;
-    cursor: pointer;
-  }
-  tbody tr:hover { background: var(--hijau-muda); }
-  tbody tr.dipilih { background: #e0f0ea; }
-  td { padding: 10px 14px; vertical-align: middle; }
-  td:first-child { text-align: center; }
-  td.nama { font-weight: 600; }
-  td.nop { font-family: monospace; font-size: 0.78rem; color: var(--abu); }
-  td.total { font-weight: 700; color: var(--merah); }
-  .badge-rt { background: #e8f4ee; color: var(--hijau); padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: 600; }
-  .tahun-tags { display: flex; gap: 4px; flex-wrap: wrap; }
-  .tahun-tag {
-    background: #fff3cd;
-    color: #856404;
-    padding: 2px 7px;
-    border-radius: 8px;
-    font-size: 0.72rem;
-    font-weight: 600;
-  }
-  .aksi-btns { display: flex; gap: 6px; white-space: nowrap; }
-  .btn-pemberitahuan, .btn-undangan {
-    border: none;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .btn-pemberitahuan { background: var(--hijau-muda); color: var(--hijau-tua); }
-  .btn-pemberitahuan:hover { background: var(--hijau); color: white; }
-  .btn-undangan { background: var(--emas-muda); color: #7a5f00; }
-  .btn-undangan:hover { background: var(--emas); color: var(--hijau-tua); }
+/* ============================================
+   OVERLAY & MODAL
+   ============================================ */
+.overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 200;
+  padding: 20px; overflow-y: auto;
+}
+.overlay.aktif { display: flex; align-items: flex-start; justify-content: center; }
 
-  /* PAGINATION */
-  .pagination {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 16px;
-    border-top: 1px solid var(--border);
-  }
-  .pagination button {
-    background: white;
-    border: 1.5px solid var(--border);
-    padding: 6px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 0.83rem;
-    transition: all 0.15s;
-  }
-  .pagination button:hover:not(:disabled) { border-color: var(--hijau); color: var(--hijau); }
-  .pagination button:disabled { opacity: 0.4; cursor: not-allowed; }
-  .pagination button.aktif { background: var(--hijau); color: white; border-color: var(--hijau); }
-  .pagination .info-page { font-size: 0.82rem; color: var(--abu); }
+.modal {
+  background: white; border-radius: 14px;
+  width: 100%; max-width: 1000px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.35);
+  display: flex; flex-direction: column;
+  max-height: calc(100vh - 40px);
+  margin: auto;
+  overflow: hidden;
+}
 
-  /* MODAL */
-  .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 100;
-    overflow-y: auto;
-    padding: 24px;
-  }
-  .overlay.aktif { display: flex; align-items: flex-start; justify-content: center; }
-  .modal {
-    background: white;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 700px;
-    overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-    margin: auto;
-  }
-  .modal-header {
-    background: var(--hijau-tua);
-    color: white;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .modal-header h3 { font-size: 0.95rem; font-weight: 700; }
-  .modal-header button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.4rem;
-    cursor: pointer;
-    line-height: 1;
-    opacity: 0.8;
-  }
-  .modal-header button:hover { opacity: 1; }
-  .modal-body { padding: 20px 24px; }
-  .modal-footer {
-    padding: 14px 24px;
-    background: #f8f8f8;
-    border-top: 1px solid var(--border);
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-  }
-  .btn-cetak-modal {
-    background: var(--hijau);
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .btn-tutup-modal {
-    background: #f0f0f0;
-    color: var(--teks);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.88rem;
-    cursor: pointer;
-  }
+.modal-header {
+  background: var(--hijau-tua); color: white;
+  padding: 16px 22px; display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.modal-header.und { background: #6b3a00; }
+.modal-header h3 { font-size: 0.95rem; font-weight: 700; }
+.modal-header button { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; line-height: 1; opacity: .7; }
+.modal-header button:hover { opacity: 1; }
 
-  .form-group { margin-bottom: 14px; }
-  .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--hijau-tua); margin-bottom: 5px; }
-  .form-group input {
-    width: 100%;
-    padding: 9px 12px;
-    border: 1.5px solid var(--border);
-    border-radius: 7px;
-    font-size: 0.88rem;
-    font-family: inherit;
-    outline: none;
-  }
-  .form-group input:focus { border-color: var(--hijau); }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .info-wajib {
-    background: var(--hijau-muda);
-    border-radius: 8px;
-    padding: 12px 14px;
-    margin-bottom: 16px;
-    font-size: 0.83rem;
-    line-height: 1.6;
-  }
-  .info-wajib strong { color: var(--hijau-tua); }
-  .tunggakan-list { margin-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-  .tunggakan-item {
-    background: #fff3cd;
-    color: #7a5c00;
-    padding: 3px 10px;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
+/* 2-col layout */
+.modal-body-2col {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  flex: 1;
+  overflow: hidden;
+  min-height: 0;
+}
+.modal-form-col {
+  padding: 20px;
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.modal-preview-col {
+  display: flex;
+  flex-direction: column;
+  background: #eef0ee;
+  overflow: hidden;
+}
+.preview-topbar {
+  padding: 9px 16px;
+  background: #e0e4e0;
+  border-bottom: 1px solid #ccc;
+  font-size: 0.73rem;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  flex-shrink: 0;
+}
+.preview-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
 
-  /* PRINT AREA */
-  #print-area { display: none; }
+/* The paper preview inside modal */
+.kertas-preview {
+  background: white;
+  box-shadow: 0 3px 16px rgba(0,0,0,.15);
+  border-radius: 3px;
+  padding: 32px 36px;
+  font-family: 'Times New Roman', serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  color: #111;
+  min-height: 600px;
+}
+.kertas-preview .kop { text-align: center; border-bottom: 3px double #111; padding-bottom: 10px; margin-bottom: 14px; }
+.kertas-preview .kop-nama { font-size: 13.5pt; font-weight: bold; text-transform: uppercase; }
+.kertas-preview .kop-sub { font-size: 10pt; }
+.kertas-preview .judul { text-align: center; font-size: 12pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 12px 0 3px; }
+.kertas-preview .nomor { text-align: center; font-size: 10pt; margin-bottom: 16px; }
+.kertas-preview .tabel-identitas { border-collapse: collapse; margin-bottom: 14px; width: auto; }
+.kertas-preview .tabel-identitas td { padding: 2px 0; font-size: 10.5pt; vertical-align: top; }
+.kertas-preview .tabel-identitas td:nth-child(2) { padding: 0 8px; }
+.kertas-preview .para { margin-bottom: 10px; font-size: 10.5pt; text-align: justify; }
+.kertas-preview .nominal { text-align: center; font-size: 13pt; font-weight: bold; margin: 10px 0 6px; }
+.kertas-preview .nominal-kecil { text-align: center; font-size: 9pt; color: #444; margin-bottom: 12px; }
+.kertas-preview .ttd { display: flex; justify-content: flex-end; margin-top: 20px; }
+.kertas-preview .ttd-box { text-align: center; min-width: 200px; }
+.kertas-preview .ttd-jabatan { font-weight: bold; }
+.kertas-preview .ttd-spasi { height: 58px; }
+.kertas-preview .ttd-nama { font-weight: bold; text-decoration: underline; }
 
-  @media print {
-    body > * { display: none !important; }
-    #print-area { display: block !important; }
-    @page { margin: 2cm; size: A4; }
-  }
+/* FORM ELEMENTS */
+.form-group { display: flex; flex-direction: column; gap: 5px; }
+.form-group label { font-size: 0.77rem; font-weight: 700; color: var(--hijau-tua); text-transform: uppercase; letter-spacing: .5px; }
+.form-group input {
+  padding: 8px 12px; border: 1.5px solid var(--border); border-radius: 7px;
+  font-size: 0.88rem; font-family: inherit; outline: none;
+}
+.form-group input:focus { border-color: var(--hijau); }
+.info-wajib-box {
+  background: var(--hijau-muda); border-radius: 8px; padding: 12px 14px;
+  font-size: 0.82rem; line-height: 1.6; border-left: 3px solid var(--hijau);
+}
+.info-wajib-box strong { color: var(--hijau-tua); font-size: 0.9rem; }
+.info-wajib-box .tunggakan-chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+.chip { background: #fff3cd; color: #7a5c00; padding: 2px 9px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; }
+.chip.total { background: #fee2e2; color: #991b1b; }
 
-  /* SURAT STYLES (untuk print) */
-  .surat {
-    font-family: 'Times New Roman', serif;
-    font-size: 12pt;
-    line-height: 1.5;
-    color: black;
-    page-break-after: always;
-    padding: 0;
-  }
-  .surat:last-child { page-break-after: avoid; }
-  .surat-kop {
-    text-align: center;
-    border-bottom: 3px double black;
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-  }
-  .surat-kop .instansi { font-size: 14pt; font-weight: bold; text-transform: uppercase; }
-  .surat-kop .sub { font-size: 11pt; }
-  .surat-kop .alamat { font-size: 10pt; }
-  .surat-judul {
-    text-align: center;
-    font-size: 13pt;
-    font-weight: bold;
-    text-decoration: underline;
-    text-transform: uppercase;
-    margin: 12px 0 4px;
-  }
-  .surat-nomor { text-align: center; font-size: 11pt; margin-bottom: 16px; }
-  .surat-identitas { margin-bottom: 14px; }
-  .surat-identitas table { border-collapse: collapse; }
-  .surat-identitas td { padding: 2px 0; font-size: 11pt; }
-  .surat-identitas td:nth-child(2) { padding: 0 8px; }
-  .surat-isi { margin-bottom: 14px; font-size: 11pt; text-align: justify; }
-  .surat-nominal {
-    text-align: center;
-    font-size: 13pt;
-    font-weight: bold;
-    margin: 12px 0;
-  }
-  .surat-ttd {
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .ttd-box { text-align: center; min-width: 200px; }
-  .ttd-box .kota-tgl { margin-bottom: 4px; }
-  .ttd-box .jabatan { font-weight: bold; margin-bottom: 60px; }
-  .ttd-box .nama-kepala { font-weight: bold; text-decoration: underline; }
-  .jadwal-tabel { width: 100%; border-collapse: collapse; margin: 8px 0 14px; font-size: 11pt; }
-  .jadwal-tabel td { padding: 4px 0; }
-  .jadwal-tabel td:nth-child(2) { padding: 0 8px; }
+.modal-footer {
+  padding: 13px 22px; background: #f5f5f5; border-top: 1px solid var(--border);
+  display: flex; gap: 10px; justify-content: flex-end; flex-shrink: 0;
+}
+.btn-batal { background: #eee; border: none; padding: 9px 18px; border-radius: 8px; cursor: pointer; font-size: 0.88rem; font-family: inherit; }
+.btn-cetak-final { background: var(--hijau); color: white; border: none; padding: 9px 20px; border-radius: 8px; cursor: pointer; font-size: 0.88rem; font-weight: 700; font-family: inherit; }
+.btn-cetak-final:hover { background: var(--hijau-tua); }
 
-  /* EMPTY STATE */
-  .empty-state { text-align: center; padding: 48px 20px; color: var(--abu); }
-  .empty-state .icon { font-size: 3rem; margin-bottom: 12px; }
+/* PRINT */
+#print-area { display: none; }
+@media print {
+  body > * { display: none !important; }
+  #print-area { display: block !important; }
+  @page { margin: 2cm; size: A4 portrait; }
+  .surat-cetak { font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.6; page-break-after: always; }
+  .surat-cetak:last-child { page-break-after: avoid; }
+  .surat-cetak .kop { text-align: center; border-bottom: 3px double black; padding-bottom: 10px; margin-bottom: 16px; }
+  .surat-cetak .kop-nama { font-size: 14pt; font-weight: bold; text-transform: uppercase; }
+  .surat-cetak .kop-sub { font-size: 11pt; }
+  .surat-cetak .judul { text-align: center; font-size: 13pt; font-weight: bold; text-decoration: underline; text-transform: uppercase; margin: 12px 0 4px; }
+  .surat-cetak .nomor { text-align: center; font-size: 11pt; margin-bottom: 18px; }
+  .surat-cetak .tabel-identitas { border-collapse: collapse; }
+  .surat-cetak .tabel-identitas td { padding: 2px 0; font-size: 11pt; vertical-align: top; }
+  .surat-cetak .tabel-identitas td:nth-child(2) { padding: 0 8px; }
+  .surat-cetak .para { margin-bottom: 12pt; font-size: 11pt; text-align: justify; }
+  .surat-cetak .nominal { text-align: center; font-size: 13pt; font-weight: bold; margin: 12pt 0 4pt; }
+  .surat-cetak .nominal-kecil { text-align: center; font-size: 10pt; color: #333; margin-bottom: 14pt; }
+  .surat-cetak .ttd { display: flex; justify-content: flex-end; margin-top: 24pt; }
+  .surat-cetak .ttd-box { text-align: center; min-width: 210px; }
+  .surat-cetak .ttd-jabatan { font-weight: bold; }
+  .surat-cetak .ttd-spasi { height: 70pt; }
+  .surat-cetak .ttd-nama { font-weight: bold; text-decoration: underline; }
+}
 
-  /* CHECKBOX */
-  input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--hijau); }
-
-  /* RESPONSIVE */
-  @media (max-width: 640px) {
-    .stats-bar { grid-template-columns: 1fr; }
-    .form-row { grid-template-columns: 1fr; }
-    .header-badge { display: none; }
-    .aksi-btns { flex-direction: column; }
-  }
+@media (max-width: 700px) {
+  .modal-body-2col { grid-template-columns: 1fr; }
+  .modal-form-col { border-right: none; border-bottom: 1px solid var(--border); max-height: 50vh; }
+  .modal-preview-col { max-height: 50vh; }
+  .stats-bar { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -454,143 +252,150 @@
 
 <main>
 
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stat-card">
-      <div class="angka" id="stat-total">0</div>
-      <div class="label">Wajib Pajak Belum Bayar</div>
-    </div>
-    <div class="stat-card emas">
-      <div class="angka" id="stat-rupiah">0</div>
-      <div class="label">Total Tunggakan Seluruhnya</div>
-    </div>
-    <div class="stat-card">
-      <div class="angka" id="stat-filter">0</div>
-      <div class="label">Data Tersaring Saat Ini</div>
-    </div>
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="angka" id="stat-total">0</div>
+    <div class="label">Wajib Pajak Belum Bayar</div>
   </div>
+  <div class="stat-card emas">
+    <div class="angka" id="stat-rupiah">0</div>
+    <div class="label">Total Tunggakan Seluruhnya</div>
+  </div>
+  <div class="stat-card">
+    <div class="angka" id="stat-filter">0</div>
+    <div class="label">Data Tersaring Saat Ini</div>
+  </div>
+</div>
 
-  <!-- FILTER -->
-  <div class="panel-cari">
-    <h2>🔍 Cari & Filter</h2>
-    <div class="filter-row">
-      <input type="text" id="cari-nama" placeholder="Cari nama wajib pajak..." oninput="applyFilter()">
-      <input type="text" id="cari-nop" placeholder="Cari Nomor SPPT / NOP..." oninput="applyFilter()">
-      <select id="filter-rw" onchange="applyFilter()">
-        <option value="">Semua RW</option>
-      </select>
-      <select id="filter-tahun" onchange="applyFilter()">
-        <option value="">Semua Tahun Tunggakan</option>
-        <option value="2020">Tunggakan 2020</option>
-        <option value="2021">Tunggakan 2021</option>
-        <option value="2022">Tunggakan 2022</option>
-        <option value="2023">Tunggakan 2023</option>
-        <option value="2024">Tunggakan 2024</option>
-        <option value="2025">Tunggakan 2025</option>
-      </select>
-    </div>
+<div class="panel-cari">
+  <h2>🔍 Cari &amp; Filter</h2>
+  <div class="filter-row">
+    <input type="text" id="cari-nama" placeholder="Cari nama wajib pajak..." oninput="applyFilter()">
+    <input type="text" id="cari-nop" placeholder="Cari Nomor SPPT / NOP..." oninput="applyFilter()">
+    <select id="filter-rw" onchange="applyFilter()">
+      <option value="">Semua RW</option>
+    </select>
+    <select id="filter-tahun" onchange="applyFilter()">
+      <option value="">Semua Tahun Tunggakan</option>
+      <option value="2020">Tunggakan 2020</option>
+      <option value="2021">Tunggakan 2021</option>
+      <option value="2022">Tunggakan 2022</option>
+      <option value="2023">Tunggakan 2023</option>
+      <option value="2024">Tunggakan 2024</option>
+      <option value="2025">Tunggakan 2025</option>
+    </select>
   </div>
+</div>
 
-  <!-- TABEL -->
-  <div class="panel-tabel">
-    <div class="tabel-header">
-      <span>Daftar Wajib Pajak Belum Bayar</span>
-      <div style="display:flex;gap:10px;align-items:center;">
-        <span class="total-terpilih" id="info-terpilih">0 terpilih</span>
-        <button class="btn-cetak-semua" onclick="cetakSemua('pemberitahuan')">📄 Cetak Pemberitahuan</button>
-        <button class="btn-cetak-semua" style="background:var(--hijau-muda);color:var(--hijau-tua);" onclick="cetakSemua('undangan')">✉️ Cetak Undangan</button>
-      </div>
+<div class="panel-tabel">
+  <div class="tabel-header">
+    <span>Daftar Wajib Pajak Belum Bayar</span>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <span class="total-terpilih" id="info-terpilih">0 terpilih</span>
+      <button class="btn-cetak-semua hijau" onclick="cetakBatch('pemberitahuan')">📄 Pemberitahuan (Terpilih)</button>
+      <button class="btn-cetak-semua" onclick="cetakBatch('undangan')">✉️ Undangan (Terpilih)</button>
     </div>
-    <div class="tabel-scroll">
-      <table>
-        <thead>
-          <tr>
-            <th><input type="checkbox" id="pilih-semua" onchange="pilihSemua(this)"></th>
-            <th>Nama Wajib Pajak</th>
-            <th>Nomor SPPT</th>
-            <th>RT/RW</th>
-            <th>Tahun Tunggakan</th>
-            <th>Total Tunggakan</th>
-            <th>Aksi</th>
-          </tr>
-        </thead>
-        <tbody id="tbody-data"></tbody>
-      </table>
-    </div>
-    <div id="empty-state" class="empty-state" style="display:none;">
-      <div class="icon">🔎</div>
-      <div>Tidak ada data yang sesuai pencarian</div>
-    </div>
-    <div class="pagination" id="pagination"></div>
   </div>
+  <div class="tabel-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th><input type="checkbox" id="pilih-semua" onchange="pilihSemua(this)"></th>
+          <th>Nama Wajib Pajak</th>
+          <th>Nomor SPPT</th>
+          <th>RT/RW</th>
+          <th>Tahun Tunggakan</th>
+          <th>Total Tunggakan</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-data"></tbody>
+    </table>
+  </div>
+  <div id="empty-state" class="empty-state" style="display:none;">🔎 Tidak ada data yang sesuai pencarian</div>
+  <div class="pagination" id="pagination"></div>
+</div>
 
 </main>
 
-<!-- MODAL SURAT PEMBERITAHUAN -->
-<div class="overlay" id="modal-pemberitahuan">
+<!-- ===================== MODAL PEMBERITAHUAN ===================== -->
+<div class="overlay" id="modal-pb">
   <div class="modal">
     <div class="modal-header">
-      <h3>📄 Surat Pemberitahuan PBB</h3>
-      <button onclick="tutupModal('pemberitahuan')">×</button>
+      <h3>📄 Surat Pemberitahuan PBB-P2</h3>
+      <button onclick="tutupModal('pb')">×</button>
     </div>
-    <div class="modal-body">
-      <div class="info-wajib" id="info-wajib-pb"></div>
-      <div class="form-row">
+    <div class="modal-body-2col">
+      <!-- FORM -->
+      <div class="modal-form-col">
+        <div class="info-wajib-box" id="iwb-pb"></div>
         <div class="form-group">
           <label>Nomor Surat</label>
-          <input type="text" id="pb-nomor" value="001">
+          <input type="text" id="pb-nomor" value="001" oninput="rerender('pb')">
         </div>
         <div class="form-group">
           <label>Alamat Wajib Pajak</label>
-          <input type="text" id="pb-alamat" placeholder="Kp. ...., RT/RW">
+          <input type="text" id="pb-alamat" placeholder="Kp. ..., RT .../RW ..." oninput="rerender('pb')">
+        </div>
+      </div>
+      <!-- PREVIEW -->
+      <div class="modal-preview-col">
+        <div class="preview-topbar">👁 Preview Surat</div>
+        <div class="preview-body">
+          <div class="kertas-preview" id="prev-pb"></div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-tutup-modal" onclick="tutupModal('pemberitahuan')">Batal</button>
-      <button class="btn-cetak-modal" onclick="cetakSurat('pemberitahuan')">🖨️ Cetak Surat</button>
+      <button class="btn-batal" onclick="tutupModal('pb')">Batal</button>
+      <button class="btn-cetak-final" onclick="docetak('pb')">🖨️ Cetak Surat</button>
     </div>
   </div>
 </div>
 
-<!-- MODAL SURAT UNDANGAN -->
-<div class="overlay" id="modal-undangan">
+<!-- ===================== MODAL UNDANGAN ===================== -->
+<div class="overlay" id="modal-und">
   <div class="modal">
-    <div class="modal-header" style="background:#6b3a00;">
-      <h3>✉️ Surat Undangan PBB</h3>
-      <button onclick="tutupModal('undangan')">×</button>
+    <div class="modal-header und">
+      <h3>✉️ Surat Undangan PBB-P2</h3>
+      <button onclick="tutupModal('und')">×</button>
     </div>
-    <div class="modal-body">
-      <div class="info-wajib" id="info-wajib-und"></div>
-      <div class="form-row">
+    <div class="modal-body-2col">
+      <!-- FORM -->
+      <div class="modal-form-col">
+        <div class="info-wajib-box" id="iwb-und"></div>
         <div class="form-group">
           <label>Nomor Surat</label>
-          <input type="text" id="und-nomor" value="001">
+          <input type="text" id="und-nomor" value="001" oninput="rerender('und')">
         </div>
         <div class="form-group">
           <label>Alamat Wajib Pajak</label>
-          <input type="text" id="und-alamat" placeholder="Kp. ...., RT/RW">
+          <input type="text" id="und-alamat" placeholder="Kp. ..., RT .../RW ..." oninput="rerender('und')">
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group">
-          <label>Hari/Tanggal Undangan</label>
-          <input type="text" id="und-hari" placeholder="Senin, 16 Juni 2025">
+          <label>Hari / Tanggal</label>
+          <input type="text" id="und-hari" placeholder="Senin, 16 Juni 2025" oninput="rerender('und')">
         </div>
         <div class="form-group">
           <label>Waktu</label>
-          <input type="text" id="und-waktu" value="09.00 WIB">
+          <input type="text" id="und-waktu" value="09.00 WIB" oninput="rerender('und')">
+        </div>
+      </div>
+      <!-- PREVIEW -->
+      <div class="modal-preview-col">
+        <div class="preview-topbar">👁 Preview Surat</div>
+        <div class="preview-body">
+          <div class="kertas-preview" id="prev-und"></div>
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn-tutup-modal" onclick="tutupModal('undangan')">Batal</button>
-      <button class="btn-cetak-modal" onclick="cetakSurat('undangan')">🖨️ Cetak Surat</button>
+      <button class="btn-batal" onclick="tutupModal('und')">Batal</button>
+      <button class="btn-cetak-final" onclick="docetak('und')">🖨️ Cetak Surat</button>
     </div>
   </div>
 </div>
 
-<!-- AREA CETAK -->
 <div id="print-area"></div>
 
 <script>
@@ -598,87 +403,81 @@ const PBB_DATA = [{"nama":"IYUS","rt":"2","rw":"7","nop":"32.15.031.003.001.0005
 
 let dataFiltered = [];
 let halaman = 1;
-const perHalaman = 25;
+const PER_HAL = 25;
 let dipilih = new Set();
-let suratSaatIni = null;
-let modeCetak = null; // 'single' atau 'batch'
-let dataBatch = [];
+let curData = null; // data WP yang sedang dibuka modal single
+let batchData = []; // data WP untuk cetak massal
 
-function formatRp(n) {
-  return 'Rp ' + n.toLocaleString('id-ID');
+/* ============ UTILS ============ */
+function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+function autoAlamat(d) {
+  return d.rt !== '0'
+    ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon`
+    : 'Desa Kasomalang Kulon';
 }
 
+function tgl() { return '11 Juni 2026'; }
+
+function nomorFmt(s) { return String(parseInt(s)||1).padStart(3,'0'); }
+
+/* ============ INIT ============ */
 function init() {
-  // Hitung stats
-  const total = PBB_DATA.length;
-  const totalRp = PBB_DATA.reduce((s, d) => s + d.total, 0);
-  document.getElementById('stat-total').textContent = total.toLocaleString('id-ID');
-  document.getElementById('stat-rupiah').textContent = formatRp(totalRp);
-  
-  // Populate RW filter
-  const rwSet = new Set(PBB_DATA.map(d => d.rw).filter(r => r !== '0'));
-  const rwSorted = [...rwSet].sort((a,b) => parseInt(a)-parseInt(b));
-  const selRw = document.getElementById('filter-rw');
-  rwSorted.forEach(rw => {
-    const o = document.createElement('option');
-    o.value = rw;
-    o.textContent = 'RW ' + rw;
-    selRw.appendChild(o);
-  });
+  document.getElementById('stat-total').textContent = PBB_DATA.length.toLocaleString('id-ID');
+  const totalRp = PBB_DATA.reduce((s,d) => s+d.total, 0);
+  document.getElementById('stat-rupiah').textContent = rp(totalRp);
+
+  const rwSet = [...new Set(PBB_DATA.map(d=>d.rw).filter(r=>r!=='0'))].sort((a,b)=>+a-+b);
+  const sel = document.getElementById('filter-rw');
+  rwSet.forEach(r => { const o = document.createElement('option'); o.value=r; o.textContent='RW '+r; sel.appendChild(o); });
 
   applyFilter();
 }
 
+/* ============ FILTER & TABLE ============ */
 function applyFilter() {
-  const cariNama = document.getElementById('cari-nama').value.toLowerCase().trim();
-  const cariNop = document.getElementById('cari-nop').value.toLowerCase().trim();
-  const filterRw = document.getElementById('filter-rw').value;
-  const filterTahun = document.getElementById('filter-tahun').value;
+  const cn = document.getElementById('cari-nama').value.toLowerCase();
+  const cs = document.getElementById('cari-nop').value.toLowerCase();
+  const rw = document.getElementById('filter-rw').value;
+  const th = document.getElementById('filter-tahun').value;
 
   dataFiltered = PBB_DATA.filter(d => {
-    if (cariNama && !d.nama.toLowerCase().includes(cariNama)) return false;
-    if (cariNop && !d.nop.toLowerCase().includes(cariNop)) return false;
-    if (filterRw && d.rw !== filterRw) return false;
-    if (filterTahun && !d.tunggakan[filterTahun]) return false;
+    if (cn && !d.nama.toLowerCase().includes(cn)) return false;
+    if (cs && !d.nop.toLowerCase().includes(cs)) return false;
+    if (rw && d.rw !== rw) return false;
+    if (th && !d.tunggakan[th]) return false;
     return true;
   });
 
   document.getElementById('stat-filter').textContent = dataFiltered.length.toLocaleString('id-ID');
   halaman = 1;
-  renderTable();
   dipilih.clear();
+  renderTable();
   updatePilihan();
 }
 
 function renderTable() {
   const tbody = document.getElementById('tbody-data');
   const empty = document.getElementById('empty-state');
-  
-  if (dataFiltered.length === 0) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    document.getElementById('pagination').innerHTML = '';
-    return;
-  }
+  if (!dataFiltered.length) { tbody.innerHTML=''; empty.style.display='block'; document.getElementById('pagination').innerHTML=''; return; }
   empty.style.display = 'none';
 
-  const start = (halaman - 1) * perHalaman;
-  const pageData = dataFiltered.slice(start, start + perHalaman);
-
-  tbody.innerHTML = pageData.map((d, i) => {
-    const idx = start + i;
-    const isDipilih = dipilih.has(idx);
-    const tahunTags = Object.keys(d.tunggakan).map(t => `<span class="tahun-tag">${t}: ${formatRp(d.tunggakan[t])}</span>`).join('');
-    return `<tr class="${isDipilih ? 'dipilih' : ''}" onclick="togglePilih(${idx})">
-      <td><input type="checkbox" ${isDipilih?'checked':''} onclick="event.stopPropagation();togglePilih(${idx})"></td>
+  const start = (halaman-1)*PER_HAL;
+  const rows = dataFiltered.slice(start, start+PER_HAL);
+  tbody.innerHTML = rows.map((d,i) => {
+    const idx = start+i;
+    const sel = dipilih.has(idx);
+    const chips = Object.entries(d.tunggakan).map(([t,v]) => `<span class="tahun-tag">${t}: ${rp(v)}</span>`).join('');
+    return `<tr class="${sel?'dipilih':''}" onclick="togglePilih(${idx})">
+      <td><input type="checkbox" ${sel?'checked':''} onclick="event.stopPropagation();togglePilih(${idx})"></td>
       <td class="nama">${d.nama}</td>
       <td class="nop">${d.nop}</td>
       <td><span class="badge-rt">RT ${d.rt}/RW ${d.rw}</span></td>
-      <td><div class="tahun-tags">${tahunTags}</div></td>
-      <td class="total">${formatRp(d.total)}</td>
+      <td><div class="tahun-tags">${chips}</div></td>
+      <td class="total">${rp(d.total)}</td>
       <td><div class="aksi-btns">
-        <button class="btn-pemberitahuan" onclick="event.stopPropagation();bukaModal('pemberitahuan',${idx})">Pemberitahuan</button>
-        <button class="btn-undangan" onclick="event.stopPropagation();bukaModal('undangan',${idx})">Undangan</button>
+        <button class="btn-pb" onclick="event.stopPropagation();bukaModal('pb',${idx})">Pemberitahuan</button>
+        <button class="btn-und" onclick="event.stopPropagation();bukaModal('und',${idx})">Undangan</button>
       </div></td>
     </tr>`;
   }).join('');
@@ -687,250 +486,225 @@ function renderTable() {
 }
 
 function renderPagination() {
-  const totalHal = Math.ceil(dataFiltered.length / perHalaman);
+  const tot = Math.ceil(dataFiltered.length/PER_HAL);
   const pg = document.getElementById('pagination');
-  if (totalHal <= 1) { pg.innerHTML = ''; return; }
-  
-  let html = `<button onclick="goPage(${halaman-1})" ${halaman===1?'disabled':''}>← Prev</button>`;
-  
-  const range = [];
-  for (let i = 1; i <= totalHal; i++) {
-    if (i === 1 || i === totalHal || Math.abs(i - halaman) <= 2) range.push(i);
-    else if (range[range.length-1] !== '...') range.push('...');
+  if (tot<=1) { pg.innerHTML=''; return; }
+  let h = `<button onclick="goPage(${halaman-1})" ${halaman===1?'disabled':''}>← Prev</button>`;
+  const pages = [];
+  for (let i=1;i<=tot;i++) {
+    if (i===1||i===tot||Math.abs(i-halaman)<=2) pages.push(i);
+    else if (pages[pages.length-1]!=='...') pages.push('...');
   }
-  
-  range.forEach(p => {
-    if (p === '...') {
-      html += `<span style="padding:0 4px">…</span>`;
-    } else {
-      html += `<button class="${p===halaman?'aktif':''}" onclick="goPage(${p})">${p}</button>`;
-    }
+  pages.forEach(p => {
+    h += p==='...' ? '<span style="padding:0 4px">…</span>'
+       : `<button class="${p===halaman?'aktif':''}" onclick="goPage(${p})">${p}</button>`;
   });
-  
-  html += `<button onclick="goPage(${halaman+1})" ${halaman===totalHal?'disabled':''}>Next →</button>`;
-  html += `<span class="info-page">Hal ${halaman}/${totalHal} · ${dataFiltered.length} data</span>`;
-  pg.innerHTML = html;
+  h += `<button onclick="goPage(${halaman+1})" ${halaman===tot?'disabled':''}>Next →</button>`;
+  h += `<span class="info-page">Hal ${halaman}/${tot} · ${dataFiltered.length} data</span>`;
+  pg.innerHTML = h;
 }
 
 function goPage(p) {
-  const totalHal = Math.ceil(dataFiltered.length / perHalaman);
-  if (p < 1 || p > totalHal) return;
+  const tot = Math.ceil(dataFiltered.length/PER_HAL);
+  if (p<1||p>tot) return;
   halaman = p;
   renderTable();
-  window.scrollTo({top: 300, behavior: 'smooth'});
+  window.scrollTo({top:300,behavior:'smooth'});
 }
 
 function togglePilih(idx) {
-  if (dipilih.has(idx)) dipilih.delete(idx);
-  else dipilih.add(idx);
+  dipilih.has(idx) ? dipilih.delete(idx) : dipilih.add(idx);
   updatePilihan();
   renderTable();
 }
 
 function pilihSemua(cb) {
-  if (cb.checked) {
-    dataFiltered.forEach((_, i) => dipilih.add(i));
-  } else {
-    dipilih.clear();
-  }
+  if (cb.checked) dataFiltered.forEach((_,i)=>dipilih.add(i));
+  else dipilih.clear();
   updatePilihan();
   renderTable();
 }
 
 function updatePilihan() {
   document.getElementById('info-terpilih').textContent = dipilih.size + ' terpilih';
-  document.getElementById('pilih-semua').checked = dipilih.size === dataFiltered.length && dataFiltered.length > 0;
+  document.getElementById('pilih-semua').checked = dipilih.size===dataFiltered.length && dataFiltered.length>0;
 }
 
+/* ============ MODAL ============ */
 function bukaModal(tipe, idx) {
-  const d = dataFiltered[idx];
-  suratSaatIni = d;
-  modeCetak = 'single';
+  curData = dataFiltered[idx];
+  batchData = [];
 
-  const tahunList = Object.entries(d.tunggakan).map(([t,v]) => `<span class="tunggakan-item">${t}: ${formatRp(v)}</span>`).join('');
-  const infoHtml = `<strong>${d.nama}</strong><br>NOP: ${d.nop} · RT ${d.rt}/RW ${d.rw}<br>
-    <div class="tunggakan-list">${tahunList}</div>
-    <strong style="color:var(--merah);display:block;margin-top:6px;">Total: ${formatRp(d.total)}</strong>`;
+  const chips = Object.entries(curData.tunggakan).map(([t,v])=>`<span class="chip">${t}: ${rp(v)}</span>`).join('');
+  const infoHtml = `<strong>${curData.nama}</strong><br>
+    <span style="font-size:.82rem;color:#555;">NOP: ${curData.nop} &nbsp;·&nbsp; RT ${curData.rt}/RW ${curData.rw}</span>
+    <div class="tunggakan-chips">${chips}<span class="chip total">Total: ${rp(curData.total)}</span></div>`;
 
-  if (tipe === 'pemberitahuan') {
-    document.getElementById('info-wajib-pb').innerHTML = infoHtml;
-    const alamat = d.rt !== '0' ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon` : 'Desa Kasomalang Kulon';
-    document.getElementById('pb-alamat').value = alamat;
-    document.getElementById('modal-pemberitahuan').classList.add('aktif');
+  if (tipe === 'pb') {
+    document.getElementById('iwb-pb').innerHTML = infoHtml;
+    document.getElementById('pb-alamat').value = autoAlamat(curData);
+    document.getElementById('modal-pb').classList.add('aktif');
+    rerender('pb');
   } else {
-    document.getElementById('info-wajib-und').innerHTML = infoHtml;
-    const alamat = d.rt !== '0' ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon` : 'Desa Kasomalang Kulon';
-    document.getElementById('und-alamat').value = alamat;
-    document.getElementById('modal-undangan').classList.add('aktif');
+    document.getElementById('iwb-und').innerHTML = infoHtml;
+    document.getElementById('und-alamat').value = autoAlamat(curData);
+    document.getElementById('modal-und').classList.add('aktif');
+    rerender('und');
   }
 }
 
 function tutupModal(tipe) {
-  document.getElementById('modal-' + tipe).classList.remove('aktif');
+  document.getElementById('modal-'+tipe).classList.remove('aktif');
 }
 
-function cetakSemua(tipe) {
-  if (dipilih.size === 0) {
-    alert('Pilih setidaknya satu wajib pajak dengan mencentang kotak di sebelah kiri.');
-    return;
-  }
-  dataBatch = [...dipilih].map(i => dataFiltered[i]);
-  modeCetak = 'batch';
-  
-  if (tipe === 'pemberitahuan') {
-    buatSuratBatch('pemberitahuan', dataBatch);
-  } else {
-    buatSuratBatch('undangan', dataBatch);
-  }
-}
-
-function formatTanggal() {
-  return '11 Juni 2026';
-}
-
-function buatSuratPemberitahuan(d, nomor, alamat) {
-  const tahunList = Object.entries(d.tunggakan).map(([t,v]) => `Tahun ${t} sebesar ${formatRp(v)}`).join(', ');
-  const nomorFmt = nomor.toString().padStart(3, '0');
-  return `
-  <div class="surat">
-    <div class="surat-kop">
-      <div class="instansi">Kepala Desa Kasomalang Kulon</div>
-      <div class="sub">Kecamatan Kasomalang</div>
-      <div class="sub">Kabupaten Subang</div>
-    </div>
-    <div class="surat-judul">Surat Pemberitahuan</div>
-    <div class="surat-nomor">Nomor : 400/${nomorFmt}/Pemdes-KK/2026</div>
-    <div class="surat-identitas">
-      <table>
-        <tr><td>Nama Wajib Pajak</td><td>:</td><td>${d.nama}</td></tr>
-        <tr><td>Nomor SPPT</td><td>:</td><td>${d.nop}</td></tr>
-        <tr><td>RT/RW</td><td>:</td><td>RT ${d.rt}/RW ${d.rw}</td></tr>
-        <tr><td>Alamat</td><td>:</td><td>${alamat}</td></tr>
-      </table>
-    </div>
-    <div class="surat-isi">
-      Dengan hormat,<br><br>
-      Berdasarkan data Pajak Bumi dan Bangunan Perdesaan dan Perkotaan (PBB-P2) Desa Kasomalang Kulon Tahun 2025, sampai dengan surat ini diterbitkan, pembayaran PBB-P2 atas objek pajak atas nama Saudara belum tercatat lunas.
-    </div>
-    <div class="surat-isi">Adapun jumlah PBB-P2 yang masih harus dibayarkan adalah sebesar</div>
-    <div class="surat-nominal">${formatRp(d.total)}</div>
-    <div class="surat-isi" style="font-size:10.5pt;">(Terdiri dari: ${tahunList})</div>
-    <div class="surat-isi">
-      Sehubungan dengan hal tersebut, kami mengimbau kepada Saudara untuk segera melakukan pelunasan PBB-P2 tahun 2025 melalui petugas pemungut PBB Desa Kasomalang Kulon atau tempat pembayaran yang telah ditetapkan.<br><br>
-      Partisipasi dan kepatuhan masyarakat dalam memenuhi kewajiban pembayaran PBB-P2 sangat diperlukan guna mendukung penyelenggaraan pemerintahan, pembangunan, dan pelayanan kepada masyarakat di Desa Kasomalang Kulon.<br><br>
-      Demikian surat pemberitahuan ini kami sampaikan. Atas perhatian dan kerja sama Saudara, kami ucapkan terima kasih.
-    </div>
-    <div class="surat-ttd">
-      <div class="ttd-box">
-        <div class="kota-tgl">Kasomalang Kulon, ${formatTanggal()}</div>
-        <div class="jabatan">Kepala Desa Kasomalang Kulon,</div>
-        <div class="nama-kepala">H.AMIRUDIN,S.Pd.I</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function buatSuratUndangan(d, nomor, alamat, hari, waktu) {
-  const nomorFmt = nomor.toString().padStart(3, '0');
-  return `
-  <div class="surat">
-    <div class="surat-kop">
-      <div class="instansi">Kepala Desa Kasomalang Kulon</div>
-      <div class="sub">Kecamatan Kasomalang</div>
-      <div class="sub">Kabupaten Subang</div>
-    </div>
-    <div class="surat-judul">Surat Undangan</div>
-    <div class="surat-nomor">Nomor : 005/${nomorFmt}/Pemdes-KK/2026</div>
-    <div class="surat-identitas">
-      <table>
-        <tr><td>Nama Wajib Pajak</td><td>:</td><td>${d.nama}</td></tr>
-        <tr><td>Nomor SPPT</td><td>:</td><td>${d.nop}</td></tr>
-        <tr><td>RT/RW</td><td>:</td><td>RT ${d.rt}/RW ${d.rw}</td></tr>
-        <tr><td>Alamat</td><td>:</td><td>${alamat}</td></tr>
-      </table>
-    </div>
-    <div class="surat-isi">
-      Dengan hormat,<br><br>
-      Sehubungan dengan masih adanya kewajiban pembayaran Pajak Bumi dan Bangunan Perdesaan dan Perkotaan (PBB-P2) Tahun 2025 atas nama Saudara, bersama ini kami mengundang Saudara untuk hadir pada:
-    </div>
-    <div class="surat-identitas">
-      <table class="jadwal-tabel">
-        <tr><td>Hari/Tanggal</td><td>:</td><td>${hari}</td></tr>
-        <tr><td>Waktu</td><td>:</td><td>${waktu}</td></tr>
-        <tr><td>Tempat</td><td>:</td><td>Kantor Desa Kasomalang Kulon</td></tr>
-        <tr><td>Acara</td><td>:</td><td>Klarifikasi dan Penyelesaian Pembayaran PBB-P2 Tahun 2025</td></tr>
-      </table>
-    </div>
-    <div class="surat-isi">
-      Demikian surat undangan ini kami sampaikan. Mengingat pentingnya acara tersebut, kami mengharapkan kehadiran Saudara tepat pada waktu yang telah ditentukan. Atas perhatian dan kehadiran Saudara, kami ucapkan terima kasih.
-    </div>
-    <div class="surat-ttd">
-      <div class="ttd-box">
-        <div class="kota-tgl">Kasomalang Kulon, ${formatTanggal()}</div>
-        <div class="jabatan">Kepala Desa Kasomalang Kulon,</div>
-        <div class="nama-kepala">H.AMIRUDIN,S.Pd.I</div>
-      </div>
-    </div>
-  </div>`;
-}
-
-function cetakSurat(tipe) {
-  const printArea = document.getElementById('print-area');
-
-  if (tipe === 'pemberitahuan') {
-    const nomor = document.getElementById('pb-nomor').value || '001';
-    const alamat = document.getElementById('pb-alamat').value || 'Desa Kasomalang Kulon';
-    
-    if (modeCetak === 'batch') {
-      printArea.innerHTML = dataBatch.map((d,i) => buatSuratPemberitahuan(d, parseInt(nomor)+i, 
-        d.rt !== '0' ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon` : 'Desa Kasomalang Kulon'
-      )).join('');
-    } else {
-      printArea.innerHTML = buatSuratPemberitahuan(suratSaatIni, nomor, alamat);
-    }
-    tutupModal('pemberitahuan');
-  } else {
-    const nomor = document.getElementById('und-nomor').value || '001';
-    const alamat = document.getElementById('und-alamat').value || 'Desa Kasomalang Kulon';
-    const hari = document.getElementById('und-hari').value || '..........................';
-    const waktu = document.getElementById('und-waktu').value || '09.00 WIB';
-
-    if (modeCetak === 'batch') {
-      printArea.innerHTML = dataBatch.map((d,i) => buatSuratUndangan(d, parseInt(nomor)+i,
-        d.rt !== '0' ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon` : 'Desa Kasomalang Kulon',
-        hari, waktu
-      )).join('');
-    } else {
-      printArea.innerHTML = buatSuratUndangan(suratSaatIni, nomor, alamat, hari, waktu);
-    }
-    tutupModal('undangan');
-  }
-
-  setTimeout(() => window.print(), 200);
-}
-
-function buatSuratBatch(tipe, data) {
-  if (tipe === 'pemberitahuan') {
-    document.getElementById('info-wajib-pb').innerHTML = `<strong>${data.length} surat pemberitahuan</strong> akan dicetak sekaligus.<br>Nomor surat dimulai dari nomor di bawah.`;
-    document.getElementById('modal-pemberitahuan').classList.add('aktif');
-  } else {
-    document.getElementById('info-wajib-und').innerHTML = `<strong>${data.length} surat undangan</strong> akan dicetak sekaligus.<br>Nomor surat dimulai dari nomor di bawah, hari/tanggal berlaku untuk semua surat.`;
-    document.getElementById('modal-undangan').classList.add('aktif');
-  }
-}
-
-// Tutup modal jika klik overlay
 document.querySelectorAll('.overlay').forEach(el => {
-  el.addEventListener('click', function(e) {
-    if (e.target === this) {
-      const id = this.id.replace('modal-', '');
-      tutupModal(id);
-    }
-  });
+  el.addEventListener('click', e => { if (e.target===el) { const id=el.id.replace('modal-',''); tutupModal(id); } });
 });
+
+/* ============ RERENDER PREVIEW ============ */
+function rerender(tipe) {
+  if (tipe==='pb') {
+    const d = curData;
+    if (!d) return;
+    const nomor = document.getElementById('pb-nomor').value;
+    const alamat = document.getElementById('pb-alamat').value || autoAlamat(d);
+    document.getElementById('prev-pb').innerHTML = htmlPemberitahuan(d, nomor, alamat);
+  } else {
+    const d = curData;
+    if (!d) return;
+    const nomor = document.getElementById('und-nomor').value;
+    const alamat = document.getElementById('und-alamat').value || autoAlamat(d);
+    const hari = document.getElementById('und-hari').value || '..............................';
+    const waktu = document.getElementById('und-waktu').value || '09.00 WIB';
+    document.getElementById('prev-und').innerHTML = htmlUndangan(d, nomor, alamat, hari, waktu);
+  }
+}
+
+/* ============ HTML BUILDERS ============ */
+function htmlPemberitahuan(d, nomor, alamat) {
+  const nr = nomorFmt(nomor);
+  const tList = Object.entries(d.tunggakan).map(([t,v])=>`Tahun ${t} sebesar ${rp(v)}`).join(', ');
+  return `<div class="kop">
+    <div class="kop-nama">Kepala Desa Kasomalang Kulon</div>
+    <div class="kop-sub">Kecamatan Kasomalang</div>
+    <div class="kop-sub">Kabupaten Subang</div>
+  </div>
+  <div class="judul">Surat Pemberitahuan</div>
+  <div class="nomor">Nomor : 400/${nr}/Pemdes-KK/2026</div>
+  <table class="tabel-identitas">
+    <tr><td>Nama Wajib Pajak</td><td>:</td><td>${d.nama}</td></tr>
+    <tr><td>Nomor SPPT</td><td>:</td><td>${d.nop}</td></tr>
+    <tr><td>RT/RW</td><td>:</td><td>RT ${d.rt}/RW ${d.rw}</td></tr>
+    <tr><td>Alamat</td><td>:</td><td>${alamat}</td></tr>
+  </table>
+  <p class="para">Dengan hormat,</p>
+  <p class="para">Berdasarkan data Pajak Bumi dan Bangunan Perdesaan dan Perkotaan (PBB-P2) Desa Kasomalang Kulon Tahun 2025, sampai dengan surat ini diterbitkan, pembayaran PBB-P2 atas objek pajak atas nama Saudara belum tercatat lunas.</p>
+  <p class="para">Adapun jumlah PBB-P2 yang masih harus dibayarkan adalah sebesar</p>
+  <div class="nominal">${rp(d.total)}</div>
+  <div class="nominal-kecil">(Terdiri dari: ${tList})</div>
+  <p class="para">Sehubungan dengan hal tersebut, kami mengimbau kepada Saudara untuk segera melakukan pelunasan PBB-P2 tahun 2025 melalui petugas pemungut PBB Desa Kasomalang Kulon atau tempat pembayaran yang telah ditetapkan.</p>
+  <p class="para">Partisipasi dan kepatuhan masyarakat dalam memenuhi kewajiban pembayaran PBB-P2 sangat diperlukan guna mendukung penyelenggaraan pemerintahan, pembangunan, dan pelayanan kepada masyarakat di Desa Kasomalang Kulon.</p>
+  <p class="para">Demikian surat pemberitahuan ini kami sampaikan. Atas perhatian dan kerja sama Saudara, kami ucapkan terima kasih.</p>
+  <div class="ttd"><div class="ttd-box">
+    <div>Kasomalang Kulon, ${tgl()}</div>
+    <div class="ttd-jabatan">Kepala Desa Kasomalang Kulon,</div>
+    <div class="ttd-spasi"></div>
+    <div class="ttd-nama">H.AMIRUDIN,S.Pd.I</div>
+  </div></div>`;
+}
+
+function htmlUndangan(d, nomor, alamat, hari, waktu) {
+  const nr = nomorFmt(nomor);
+  return `<div class="kop">
+    <div class="kop-nama">Kepala Desa Kasomalang Kulon</div>
+    <div class="kop-sub">Kecamatan Kasomalang</div>
+    <div class="kop-sub">Kabupaten Subang</div>
+  </div>
+  <div class="judul">Surat Undangan</div>
+  <div class="nomor">Nomor : 005/${nr}/Pemdes-KK/2026</div>
+  <table class="tabel-identitas">
+    <tr><td>Nama Wajib Pajak</td><td>:</td><td>${d.nama}</td></tr>
+    <tr><td>Nomor SPPT</td><td>:</td><td>${d.nop}</td></tr>
+    <tr><td>RT/RW</td><td>:</td><td>RT ${d.rt}/RW ${d.rw}</td></tr>
+    <tr><td>Alamat</td><td>:</td><td>${alamat}</td></tr>
+  </table>
+  <p class="para">Dengan hormat,</p>
+  <p class="para">Sehubungan dengan masih adanya kewajiban pembayaran Pajak Bumi dan Bangunan Perdesaan dan Perkotaan (PBB-P2) Tahun 2025 atas nama Saudara, bersama ini kami mengundang Saudara untuk hadir pada:</p>
+  <table class="tabel-identitas" style="margin-bottom:14px;">
+    <tr><td>Hari/Tanggal</td><td>:</td><td>${hari}</td></tr>
+    <tr><td>Waktu</td><td>:</td><td>${waktu}</td></tr>
+    <tr><td>Tempat</td><td>:</td><td>Kantor Desa Kasomalang Kulon</td></tr>
+    <tr><td>Acara</td><td>:</td><td>Klarifikasi dan Penyelesaian Pembayaran PBB-P2 Tahun 2025</td></tr>
+  </table>
+  <p class="para">Demikian surat undangan ini kami sampaikan. Mengingat pentingnya acara tersebut, kami mengharapkan kehadiran Saudara tepat pada waktu yang telah ditentukan. Atas perhatian dan kehadiran Saudara, kami ucapkan terima kasih.</p>
+  <div class="ttd"><div class="ttd-box">
+    <div>Kasomalang Kulon, ${tgl()}</div>
+    <div class="ttd-jabatan">Kepala Desa Kasomalang Kulon,</div>
+    <div class="ttd-spasi"></div>
+    <div class="ttd-nama">H.AMIRUDIN,S.Pd.I</div>
+  </div></div>`;
+}
+
+/* ============ CETAK ============ */
+function buildSuratCetak(tipe, d, nomor, extras) {
+  const inner = tipe==='pb'
+    ? htmlPemberitahuan(d, nomor, extras.alamat)
+    : htmlUndangan(d, nomor, extras.alamat, extras.hari, extras.waktu);
+  const div = document.createElement('div');
+  div.className = 'surat-cetak';
+  div.innerHTML = inner;
+  return div;
+}
+
+function docetak(tipe) {
+  const pa = document.getElementById('print-area');
+  pa.innerHTML = '';
+
+  if (tipe==='pb') {
+    const nomor = document.getElementById('pb-nomor').value;
+    const alamat = document.getElementById('pb-alamat').value || autoAlamat(curData);
+    const dataToCetak = batchData.length ? batchData : [curData];
+    dataToCetak.forEach((d,i) => {
+      pa.appendChild(buildSuratCetak('pb', d, String(parseInt(nomor||1)+i), {alamat: batchData.length ? autoAlamat(d) : alamat}));
+    });
+    tutupModal('pb');
+  } else {
+    const nomor = document.getElementById('und-nomor').value;
+    const alamat = document.getElementById('und-alamat').value || autoAlamat(curData);
+    const hari = document.getElementById('und-hari').value || '..............................';
+    const waktu = document.getElementById('und-waktu').value || '09.00 WIB';
+    const dataToCetak = batchData.length ? batchData : [curData];
+    dataToCetak.forEach((d,i) => {
+      pa.appendChild(buildSuratCetak('und', d, String(parseInt(nomor||1)+i), {alamat: batchData.length ? autoAlamat(d) : alamat, hari, waktu}));
+    });
+    tutupModal('und');
+  }
+
+  setTimeout(()=>window.print(), 150);
+}
+
+function cetakBatch(tipe) {
+  if (!dipilih.size) { alert('Pilih setidaknya satu wajib pajak terlebih dahulu.'); return; }
+  batchData = [...dipilih].map(i=>dataFiltered[i]);
+  curData = batchData[0];
+
+  const tipeId = tipe==='pemberitahuan' ? 'pb' : 'und';
+  const jumlah = batchData.length;
+
+  if (tipeId==='pb') {
+    document.getElementById('iwb-pb').innerHTML = `<strong>${jumlah} surat pemberitahuan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi.</span>`;
+    document.getElementById('pb-alamat').value = autoAlamat(curData);
+    document.getElementById('prev-pb').innerHTML = htmlPemberitahuan(curData, document.getElementById('pb-nomor').value, autoAlamat(curData));
+    document.getElementById('modal-pb').classList.add('aktif');
+  } else {
+    document.getElementById('iwb-und').innerHTML = `<strong>${jumlah} surat undangan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi. Hari/tanggal berlaku untuk semua.</span>`;
+    document.getElementById('und-alamat').value = autoAlamat(curData);
+    document.getElementById('prev-und').innerHTML = htmlUndangan(curData, document.getElementById('und-nomor').value, autoAlamat(curData), document.getElementById('und-hari').value||'..............................', document.getElementById('und-waktu').value);
+    document.getElementById('modal-und').classList.add('aktif');
+  }
+}
 
 window.addEventListener('DOMContentLoaded', init);
 </script>
-
 </body>
 </html>
