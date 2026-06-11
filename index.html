@@ -205,8 +205,9 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--h)
     <div class="hb">
       <div class="hl">&#128176; Total Tunggakan PBB-P2 - Desa Kasomalang Kulon</div>
       <div class="ha" id="hero-total">Rp 0</div>
-      <div class="hs" id="hero-sub">Memuat...</div>
-      <div class="hbr" id="hero-breakdown"></div>
+            <div class="hs" id="hero-sub">Memuat...</div>
+            <div class="hr" id="hero-rupiah">Rp 0</div>
+            <div class="hbr" id="hero-breakdown"></div>
     </div>
 
     <div class="st">&#128205; Ringkasan per Wilayah</div>
@@ -263,8 +264,9 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--h)
 
     <div class="pt">
       <div class="th">
-        <span>Daftar Wajib Pajak Belum Bayar</span>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+              <span>Daftar Wajib Pajak Belum Bayar</span>
+              <span id="hero-filter" style="color:var(--h);font-weight:600;font-size:0.8rem"> - 0 wajib pajak</span>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
           <span class="tt" id="info-terpilih">0 terpilih</span>
           <button class="bc2 hijau" onclick="cetakBatch('pemberitahuan')">&#128196; Pemberitahuan</button>
           <button class="bc2" onclick="cetakBatch('undangan')">&#9993; Undangan</button>
@@ -511,7 +513,8 @@ function applyFilter() {
   });
 
   // update hero filter stat
-  document.getElementById('hero-filter').textContent = dataFiltered.length.toLocaleString('id-ID');
+  var hf = document.getElementById('hero-filter');
+  if (hf) hf.textContent = dataFiltered.length.toLocaleString('id-ID');
 
   // active filter bar
   const bar = document.getElementById('filter-active-bar');
