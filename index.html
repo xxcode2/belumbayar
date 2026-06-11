@@ -265,13 +265,13 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--h)
     <div class="pt">
       <div class="th">
               <span>Daftar Wajib Pajak Belum Bayar</span>
-              <span id="hero-filter" style="color:var(--h);font-weight:600;font-size:0.8rem"> - 0 wajib pajak</span>
+              <span id="hero-filter" style="color:var(--h);font-weight:600;font-size:0.8rem"></span>
               <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <span class="tt" id="info-terpilih">0 terpilih</span>
-          <button class="bc2 hijau" onclick="cetakBatch('pemberitahuan')">&#128196; Pemberitahuan</button>
-          <button class="bc2" onclick="cetakBatch('undangan')">&#9993; Undangan</button>
-        </div>
-      </div>
+                <span class="tt" id="info-terpilih">0 terpilih</span>
+                <button class="bc2 hijau" onclick="cetakBatch('pemberitahuan')">&#128196; Pemberitahuan</button>
+                <button class="bc2" onclick="cetakBatch('undangan')">&#9993; Undangan</button>
+              </div>
+            </div>
       <div class="ts">
         <table>
           <thead>
@@ -514,7 +514,7 @@ function applyFilter() {
 
   // update hero filter stat
   var hf = document.getElementById('hero-filter');
-  if (hf) hf.textContent = dataFiltered.length.toLocaleString('id-ID');
+  if (hf) hf.textContent = ' - ' + dataFiltered.length.toLocaleString('id-ID') + ' wajib pajak';
 
   // active filter bar
   const bar = document.getElementById('filter-active-bar');
