@@ -1,419 +1,147 @@
-/* ================================================
-   PROFESSIONAL GOVERNMENT DASHBOARD - PBB-P2
-   Kasomalang Kulon, Subang
-   ================================================ */
-
-/* ---- RESET & BASE ---- */
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard PBB - Desa Kasomalang Kulon</title>
+<style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --green-deep:#0a3923;
-  --green-main:#1a5c3a;
-  --green-mid:#2e8b57;
-  --green-light:#e8f4ee;
-  --gold:#c49a28;
-  --gold-light:#fdf8e8;
-  --red:#dc2626;
-  --text:#1a1a1a;
-  --muted:#6b7280;
-  --border:#d1d5db;
-  --shadow-sm:0 1px 3px rgba(0,0,0,.08);
-  --shadow-md:0 4px 12px rgba(0,0,0,.1);
-  --shadow-lg:0 8px 32px rgba(0,0,0,.14);
-  --radius:12px;
-  --radius-lg:16px;
-}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
-  background:#f1f5f4;
-  color:var(--text);
-  min-height:100vh;
-  -webkit-font-smoothing:antialiased
-}
-a{text-decoration:none;color:inherit}
-
-/* ---- NAVBAR ---- */
-.nb{
-  background:var(--green-deep);
-  border-bottom:3px solid var(--gold);
-  position:sticky;top:0;z-index:300;
-  box-shadow:0 2px 12px rgba(10,57,35,.25)
-}
-.nbi{
-  max-width:1200px;margin:0 auto;
-  padding:0 24px;
-  display:flex;align-items:center;gap:16px;
-  height:64px
-}
-.nbl{
-  width:42px;height:42px;
-  background:rgba(255,255,255,.12);
-  border-radius:10px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;flex-shrink:0;
-  border:1px solid rgba(255,255,255,.15)
-}
-.nbt h1{font-size:.95rem;font-weight:700;color:#fff;line-height:1.2}
-.nbt p{font-size:.7rem;color:rgba(255,255,255,.5);margin-top:2px}
-.nbb{
-  margin-left:auto;
-  background:var(--gold);color:var(--green-deep);
-  padding:5px 14px;border-radius:8px;
-  font-size:.72rem;font-weight:700;
-  white-space:nowrap;
-  letter-spacing:.3px
-}
-
-/* Nav tabs */
-.nt{
-  display:flex;
-  border-top:1px solid rgba(255,255,255,.06);
-  max-width:1200px;margin:0 auto;
-  padding:0 24px
-}
-.nv{
-  padding:11px 28px;
-  cursor:pointer;font-size:.82rem;font-weight:600;
-  color:rgba(255,255,255,.5);
-  border-bottom:3px solid transparent;
-  transition:all .2s;
-  text-align:center;
-  display:flex;align-items:center;gap:7px;
-  user-select:none
-}
-.nv:hover{color:rgba(255,255,255,.85);background:rgba(255,255,255,.05)}
-.nv.ak{color:#fff;border-bottom-color:var(--gold);background:rgba(255,255,255,.07)}
-.nv svg{opacity:.7}
-.nv.ak svg{opacity:1}
-.nv span{display:block;font-size:.68rem;opacity:.65;margin-top:1px}
-.nv.ak span{opacity:.8}
-
-/* ---- PAGE SYSTEM ---- */
-#page-dashboard,#page-data{display:none}
-.pg{display:none !important}
-.pg.ak,#page-dashboard.ak,#page-data.ak{display:block !important}
-.pd{max-width:1200px;margin:0 auto;padding:28px 24px 48px}
-
-/* ---- HERO SECTION ---- */
-.hb{
-  background:linear-gradient(145deg,#0a3923 0%,#14523a 40%,#0a3923 100%);
-  border-radius:var(--radius-lg);
-  padding:40px 44px 36px;
-  color:#fff;
-  position:relative;overflow:hidden;
-  margin-bottom:28px;
-  box-shadow:var(--shadow-lg)
-}
-.hb::before{
-  content:'';position:absolute;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.025'%3E%3Cpath d='M20 0v40M0 20h40M-10 10l20 20M30 10L10 30'/%3E%3C/g%3E%3C/svg%3E");
-  pointer-events:none
-}
-.hb::after{
-  content:'';position:absolute;right:-40px;top:-40px;
-  width:200px;height:200px;
-  background:radial-gradient(circle,rgba(196,154,40,.15) 0%,transparent 70%);
-  pointer-events:none
-}
-.hl{
-  font-size:.7rem;font-weight:700;letter-spacing:2.5px;
-  text-transform:uppercase;color:var(--gold);
-  margin-bottom:12px;display:flex;align-items:center;gap:8px;
-  position:relative
-}
-.ha{
-  font-size:clamp(2.8rem,7vw,4.2rem);font-weight:900;
-  line-height:1;color:#fff;letter-spacing:-3px;
-  position:relative;margin-bottom:10px
-}
-.hs{
-  font-size:.85rem;color:rgba(255,255,255,.5);
-  margin-top:6px;position:relative
-}
-.hr{
-  font-size:.9rem;font-weight:600;
-  color:rgba(255,255,255,.75);
-  margin-top:4px;position:relative
-}
-.hbr{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  gap:12px;margin-top:28px;position:relative
-}
-.hbs{
-  background:rgba(255,255,255,.07);
-  border:1px solid rgba(255,255,255,.1);
-  border-radius:10px;padding:14px 16px;
-  backdrop-filter:blur(4px)
-}
-.hbsn{font-size:1.3rem;font-weight:800;color:var(--gold);line-height:1}
-.hbsl{font-size:.67rem;color:rgba(255,255,255,.45);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
-
-/* ---- SECTION TITLE ---- */
-.st{
-  font-size:.73rem;font-weight:700;color:var(--green-deep);
-  text-transform:uppercase;letter-spacing:2px;
-  margin-bottom:16px;
-  display:flex;align-items:center;gap:10px
-}
-.st::after{content:'';flex:1;height:1.5px;background:linear-gradient(to right,var(--border),transparent)}
-.st svg{color:var(--gold)}
-
-/* ---- DUSUN CARDS ---- */
-.dg{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:28px}
-.dc{
-  background:#fff;
-  border-radius:var(--radius);
-  padding:20px 16px;
-  box-shadow:var(--shadow-sm);
-  cursor:pointer;
-  transition:all .22s;
-  border:2px solid transparent;
-  position:relative;overflow:hidden
-}
-.dc::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:3px;
-  background:var(--green-main);
-  transition:height .2s
-}
-.dc:hover{
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-lg);
-  border-color:rgba(26,92,58,.15)
-}
-.dc:hover::before{height:4px}
-.dc.ak{
-  border-color:var(--green-main);
-  box-shadow:0 0 0 3px rgba(26,92,58,.1),var(--shadow-md)
-}
-.dc.ak::before{background:var(--gold);height:4px}
-.dc.lu::before{background:#9ca3af}
-.di{font-size:1.5rem;margin-bottom:8px}
-.dn{font-size:.75rem;font-weight:700;color:var(--green-deep);text-transform:uppercase;letter-spacing:.5px}
-.dr{font-size:.67rem;color:var(--muted);margin-top:3px}
-.dc2{font-size:1.6rem;font-weight:900;color:var(--green-deep);margin-top:12px;line-height:1}
-.dt{font-size:.8rem;font-weight:700;color:var(--red);margin-top:4px}
-.dbr{height:5px;background:#f0f4f1;border-radius:3px;margin-top:12px;overflow:hidden}
-.dbf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--green-main),var(--gold));transition:width 1.2s ease}
-
-/* ---- CHARTS ---- */
-.cr{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:28px}
-.cc{
-  background:#fff;border-radius:var(--radius);
-  padding:22px;box-shadow:var(--shadow-sm)
-}
-.ct{
-  font-size:.75rem;font-weight:700;color:var(--green-deep);
-  text-transform:uppercase;letter-spacing:1px;
-  margin-bottom:18px;
-  display:flex;align-items:center;gap:8px
-}
-.ct::before{content:'';display:inline-block;width:12px;height:12px;background:var(--gold);border-radius:3px}
-.bc{display:flex;flex-direction:column;gap:10px}
+:root{--h:#1a5c3a;--ht:#0f3a25;--hm:#e8f4ee;--e:#c49a28;--em:#fdf8e8;--t:#1a1a1a;--a:#6b7280;--b:#d1d5db;--m:#dc2626}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:#f0f4f0;color:var(--t);min-height:100vh}
+/* NAVBAR */
+.nb{background:var(--ht);color:#fff;border-bottom:4px solid var(--e);position:sticky;top:0;z-index:100}
+.nbi{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;gap:16px}
+.nbl{width:44px;height:44px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.nbt h1{font-size:0.95rem;font-weight:700}
+.nbt p{font-size:0.72rem;color:#a7c4b5}
+.nbb{margin-left:auto;background:var(--e);color:var(--ht);padding:5px 14px;border-radius:20px;font-size:0.72rem;font-weight:700;white-space:nowrap}
+.nt{display:flex;border-top:1px solid rgba(255,255,255,.1)}
+.nv{padding:10px 28px;cursor:pointer;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,.6);border-bottom:3px solid transparent;transition:all .15s;text-align:center;position:relative}
+.nv:hover{color:#fff;background:rgba(255,255,255,.06)}
+.nv.ak{color:#fff;border-bottom-color:var(--e);background:rgba(255,255,255,.08)}
+.nv span{display:block;font-size:0.68rem;opacity:.7}
+/* PAGES */
+.pg{display:none}.pg.ak{display:block}
+.pd{max-width:1200px;margin:0 auto;padding:24px}
+/* HERO BIG */
+.hb{background:linear-gradient(135deg,var(--ht) 0%,#1a5c3a 50%,#0f3a25 100%);border-radius:16px;padding:36px 40px;color:#fff;position:relative;overflow:hidden;margin-bottom:24px;box-shadow:0 4px 20px rgba(15,58,37,.3)}
+.hb::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");}
+.hl{font-size:0.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--e);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.ha{font-size:clamp(2.4rem,6vw,4rem);font-weight:900;line-height:1;color:#fff;letter-spacing:-2px;position:relative}
+.hs{font-size:0.8rem;color:rgba(255,255,255,.55);margin-top:8px;position:relative}.hr{font-size:0.85rem;font-weight:600;color:rgba(255,255,255,.7);margin-top:4px}
+.hbr{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:24px;position:relative}
+.hbs{background:rgba(255,255,255,.08);border-radius:10px;padding:12px 14px}
+.hbsn{font-size:1.2rem;font-weight:800;color:var(--e);line-height:1}
+.hbsl{font-size:0.68rem;color:rgba(255,255,255,.55);margin-top:3px}
+/* SECTION TITLE */
+.st{font-size:0.75rem;font-weight:700;color:var(--ht);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.st::after{content:'';flex:1;height:1px;background:var(--b)}
+/* DUSUN CARDS */
+.dg{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:24px}
+.dc{background:#fff;border-radius:14px;padding:18px 16px;box-shadow:0 2px 8px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04);cursor:pointer;transition:all .2s;border:2px solid transparent;position:relative;overflow:hidden}
+.dc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--h)}
+.dc:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(15,58,37,.15),0 2px 8px rgba(0,0,0,.08)}
+.dc.ak{border-color:var(--h)}
+.dc.ak::before{background:var(--e)}
+.dc.lu::before{background:#888}
+.di{font-size:1.6rem;margin-bottom:8px}
+.dn{font-size:0.78rem;font-weight:700;color:var(--ht)}
+.dr{font-size:0.68rem;color:var(--a);margin-top:2px}
+.dc2{font-size:1.5rem;font-weight:900;color:var(--ht);margin-top:10px;line-height:1}
+.dt{font-size:0.78rem;font-weight:700;color:var(--m);margin-top:4px}
+.dbr{height:6px;background:#e8f4ee;border-radius:3px;margin-top:10px;overflow:hidden}
+.dbf{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--h),var(--e));transition:width 1s ease}
+/* CHARTS */
+.cr{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px}
+.cc{background:#fff;border-radius:14px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04)}
+.ct{font-size:0.78rem;font-weight:700;color:var(--ht);text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px}
+.bc{display:flex;flex-direction:column;gap:8px}
 .br{display:flex;align-items:center;gap:10px}
-.bl{font-size:.73rem;font-weight:600;color:var(--muted);min-width:44px;text-align:right}
-.bt{flex:1;height:22px;background:#f5f7f5;border-radius:6px;overflow:hidden}
-.bf{
-  height:100%;border-radius:6px;
-  display:flex;align-items:center;padding:0 8px;
-  font-size:.68rem;font-weight:700;color:#fff;
-  white-space:nowrap;min-width:45px;
-  transition:width 1.2s ease
-}
+.bl{font-size:0.75rem;font-weight:600;color:var(--a);min-width:44px;text-align:right}
+.bt{flex:1;height:22px;background:#f0f4f1;border-radius:6px;overflow:hidden}
+.bf{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:8px;font-size:0.68rem;font-weight:700;color:#fff;white-space:nowrap;min-width:40px;transition:width 1.2s ease}
 .bf.hi{background:linear-gradient(90deg,#1a5c3a,#27ae60)}
-.bf.e{background:linear-gradient(90deg,#b8860b,#daa520)}
+.bf.e{background:linear-gradient(90deg,#c49a28,#e0b84a)}
 .bf.m{background:linear-gradient(90deg,#dc2626,#ef4444)}
 .bf.u{background:linear-gradient(90deg,#7c3aed,#a78bfa)}
 .bf.a2{background:linear-gradient(90deg,#555,#888)}
-.bv{font-size:.7rem;font-weight:600;color:var(--text);min-width:72px}
-
-/* ---- TOP DEBTORS ---- */
-.td{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm)}
-.tdh{
-  background:var(--green-deep);color:#fff;
-  padding:13px 22px;font-size:.8rem;font-weight:700;
-  display:flex;align-items:center;justify-content:space-between
-}
+.bv{font-size:0.7rem;font-weight:600;color:var(--t);min-width:70px}
+/* TOP DEBTORS */
+.td{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04)}
+.tdh{background:var(--ht);color:#fff;padding:12px 20px;font-size:0.8rem;font-weight:700;display:flex;align-items:center;justify-content:space-between}
 .tl{padding:0}
-.ti{
-  display:flex;align-items:center;gap:14px;
-  padding:12px 22px;
-  border-bottom:1px solid #f5f5f5;
-  transition:background .12s
-}
+.ti{display:flex;align-items:center;gap:12px;padding:10px 20px;border-bottom:1px solid #f0f0f0;transition:background .1s}
 .ti:last-child{border-bottom:none}
-.ti:hover{background:#f8faf8}
-.tr2{
-  width:30px;height:30px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-size:.72rem;font-weight:800;flex-shrink:0
-}
+.ti:hover{background:var(--hm)}
+.tr2{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.72rem;font-weight:800;flex-shrink:0}
 .tr2.g{background:#fff3cd;color:#92700c}
 .tr2.s{background:#f0f0f0;color:#666}
 .tr2.b{background:#fee2e2;color:#b91c1c}
-.tr2.n{background:var(--green-light);color:var(--green-deep)}
-.ti2{flex:1;min-width:0}
-.tn{font-size:.84rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tm{font-size:.68rem;color:var(--muted);margin-top:2px}
-.ta{font-size:.92rem;font-weight:800;color:var(--red);white-space:nowrap}
-
-/* ---- DATA PAGE ---- */
-.pdm{max-width:1200px;margin:0 auto;padding:28px 24px 48px}
-.pc{
-  background:#fff;border-radius:var(--radius);
-  padding:22px;margin-bottom:20px;
-  box-shadow:var(--shadow-sm)
-}
-.pc h2{font-size:.78rem;font-weight:700;color:var(--green-deep);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.tr2.n{background:var(--hm);color:var(--ht)}
+.ti2{flex:1}
+.tn{font-size:0.84rem;font-weight:700}
+.tm{font-size:0.7rem;color:var(--a);margin-top:1px}
+.ta{font-size:0.9rem;font-weight:800;color:var(--m)}
+/* PAGE 2 - DATA */
+.pdm{max-width:1200px;margin:0 auto;padding:24px}
+.pc{background:#fff;border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04)}
+.pc h2{font-size:0.8rem;font-weight:700;color:var(--ht);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px}
 .fr{display:flex;gap:10px;flex-wrap:wrap}
-.fr input,.fr select{
-  flex:1;min-width:150px;
-  padding:9px 13px;
-  border:1.5px solid var(--border);border-radius:8px;
-  font-size:.88rem;font-family:inherit;
-  outline:none;background:#fff;
-  color:var(--text);
-  transition:border-color .15s
-}
-.fr input:focus,.fr select:focus{border-color:var(--green-main)}
-.fr input::placeholder{color:#aaa}
-.fab{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:.8rem;color:var(--muted)}
-
-/* Table wrapper */
-.pt{
-  background:#fff;border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:var(--shadow-sm);
-  margin-bottom:24px
-}
-.th{
-  background:var(--green-main);color:#fff;
-  padding:14px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:10px
-}
-.th span{font-size:.85rem;font-weight:600}
-.tt{
-  background:rgba(255,255,255,.18);
-  padding:4px 12px;border-radius:12px;
-  font-size:.78rem;font-weight:600
-}
-.th-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.bc2{
-  background:var(--gold);color:var(--green-deep);
-  border:none;padding:7px 14px;border-radius:8px;
-  font-size:.8rem;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;gap:6px;
-  transition:all .15s
-}
-.bc2:hover{background:#b8860b;color:#fff}
+.fr input,.fr select{flex:1;min-width:140px;padding:9px 13px;border:1.5px solid var(--b);border-radius:8px;font-size:0.88rem;font-family:inherit;outline:none;background:#fff}
+.fr input:focus,.fr select:focus{border-color:var(--h)}
+.fab{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:0.8rem;color:var(--a)}
+.pt{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08),0 0 0 1px rgba(0,0,0,.04);margin-bottom:24px}
+.th{background:var(--h);color:#fff;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.th span{font-size:0.85rem;font-weight:600}
+.tt{background:rgba(255,255,255,.2);padding:4px 12px;border-radius:12px;font-size:0.78rem}
+.bc2{background:var(--e);color:var(--ht);border:none;padding:7px 16px;border-radius:7px;font-size:0.8rem;font-weight:700;cursor:pointer}
 .bc2.hijau{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3)}
-.bc2.hijau:hover{background:rgba(255,255,255,.25)}
+.bc2:hover{opacity:.85}
 .ts{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.84rem}
-thead th{
-  background:#f8faf8;
-  padding:11px 14px;text-align:left;
-  font-weight:700;color:var(--green-deep);
-  font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;
-  border-bottom:2px solid var(--border);
-  white-space:nowrap;
-  position:sticky;top:0;z-index:10
-}
-thead th:first-child{width:42px;text-align:center;padding-left:12px}
-tbody tr{
-  border-bottom:1px solid #f3f3f3;
-  transition:background .1s;cursor:pointer
-}
-tbody tr:nth-child(even){background:#fafcfb}
-tbody tr:hover{background:#edf7f2}
-tbody tr.dp{background:#d4edda}
-td{padding:10px 14px;vertical-align:middle}
+table{width:100%;border-collapse:collapse;font-size:0.84rem}
+thead th{background:#f0f4f1;padding:10px 14px;text-align:left;font-weight:700;color:var(--ht);font-size:0.73rem;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid var(--b);white-space:nowrap}
+thead th:first-child{width:40px;text-align:center}
+tbody tr{border-bottom:1px solid #f0f0f0;transition:background .1s;cursor:pointer}tbody tr:nth-child(even){background:#fafcfa}
+tbody tr:hover{background:var(--hm)}
+tbody tr.dp{background:#dff0e8}
+td{padding:9px 14px;vertical-align:middle}
 td:first-child{text-align:center}
-td.nama{font-weight:600;color:var(--green-deep)}
-td.nop{font-family:'Courier New',monospace;font-size:.76rem;color:var(--muted)}
-td.total{font-weight:700;color:var(--red)}
-.badge-rt{background:#edf7f2;color:var(--green-main);padding:2px 8px;border-radius:8px;font-size:.73rem;font-weight:600;white-space:nowrap}
-.badge-dusun{background:#fff8e8;color:#856404;padding:2px 7px;border-radius:6px;font-size:.7rem;font-weight:600;margin-left:4px}
+td.nama{font-weight:600}
+td.nop{font-family:monospace;font-size:0.77rem;color:var(--a)}
+td.total{font-weight:700;color:var(--m)}
+.badge-rt{background:#e8f4ee;color:var(--h);padding:2px 8px;border-radius:10px;font-size:0.73rem;font-weight:600;white-space:nowrap}
+.badge-dusun{background:#fff3cd;color:#856404;padding:2px 7px;border-radius:8px;font-size:0.7rem;font-weight:600;margin-left:4px}
 .yt{display:flex;gap:4px;flex-wrap:wrap}
-.yt2{background:#fff8e8;color:#856404;padding:2px 7px;border-radius:6px;font-size:.7rem;font-weight:600}
+.yt2{background:#fff3cd;color:#856404;padding:2px 7px;border-radius:8px;font-size:0.7rem;font-weight:600}
 .ab{display:flex;gap:6px}
-.bp,.bu{
-  border:none;padding:6px 12px;border-radius:7px;
-  font-size:.73rem;font-weight:600;cursor:pointer;
-  white-space:nowrap;transition:all .15s
-}
-.bp{background:#edf7f2;color:var(--green-deep)}
-.bp:hover{background:var(--green-main);color:#fff}
-.bu{background:var(--gold-light);color:#7a5f00}
-.bu:hover{background:var(--gold);color:#fff}
-input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--green-main)}
-.es{text-align:center;padding:52px;color:var(--muted);font-size:.9rem}
-.pg2{
-  display:flex;align-items:center;justify-content:center;gap:6px;
-  padding:14px;border-top:1px solid var(--border);
-  flex-wrap:wrap
-}
-.pg2 button{
-  background:#fff;border:1.5px solid var(--border);
-  padding:6px 13px;border-radius:7px;
-  cursor:pointer;font-size:.82rem;
-  transition:all .15s;color:var(--text)
-}
-.pg2 button:hover:not(:disabled){border-color:var(--green-main);color:var(--green-main)}
-.pg2 button:disabled{opacity:.3;cursor:not-allowed}
-.pg2 button.ak{background:var(--green-main);color:#fff;border-color:var(--green-main)}
-.pg2 .ip{font-size:.8rem;color:var(--muted);padding:0 6px}
-
-/* ---- MODALS ---- */
-.ov{display:none;position:fixed;inset:0;background:rgba(10,57,35,.65);z-index:400;padding:24px;overflow-y:auto;backdrop-filter:blur(4px)}
+.bp,.bu{border:none;padding:5px 10px;border-radius:6px;font-size:0.73rem;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .15s}
+.bp{background:var(--hm);color:var(--ht)}
+.bp:hover{background:var(--h);color:#fff}
+.bu{background:var(--em);color:#7a5f00}
+.bu:hover{background:var(--e);color:var(--ht)}
+input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--h)}
+.es{text-align:center;padding:48px;color:var(--a)}
+.pg2{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px;border-top:1px solid var(--b);flex-wrap:wrap}
+.pg2 button{background:#fff;border:1.5px solid var(--b);padding:5px 12px;border-radius:6px;cursor:pointer;font-size:0.82rem;transition:all .15s}
+.pg2 button:hover:not(:disabled){border-color:var(--h);color:var(--h)}
+.pg2 button:disabled{opacity:.35;cursor:not-allowed}
+.pg2 button.ak{background:var(--h);color:#fff;border-color:var(--h)}
+.pg2 .ip{font-size:0.8rem;color:var(--a)}
+/* MODALS */
+.ov{display:none;position:fixed;inset:0;background:rgba(15,58,37,.6);z-index:200;padding:20px;overflow-y:auto;backdrop-filter:blur(3px)}
 .ov.ak{display:flex;align-items:center;justify-content:center}
-.md{
-  background:#fff;border-radius:16px;
-  width:100%;max-width:1000px;
-  box-shadow:0 25px 80px rgba(10,57,35,.3),0 8px 30px rgba(0,0,0,.12);
-  display:flex;flex-direction:column;
-  max-height:calc(100vh - 48px);
-  margin:auto;overflow:hidden
-}
-.mh{
-  background:var(--green-deep);color:#fff;
-  padding:16px 22px;
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;border-bottom:3px solid var(--gold)
-}
-.mh.und{background:#5c2d00;border-bottom-color:#c49a28}
-.mh h3{font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:8px}
-.mh button{
-  background:none;border:none;color:#fff;
-  font-size:1.4rem;cursor:pointer;
-  line-height:1;opacity:.6;padding:2px 6px;border-radius:4px;
-  transition:opacity .15s
-}
+.md{background:#fff;border-radius:16px;width:100%;max-width:1000px;box-shadow:0 25px 60px rgba(15,58,37,.25),0 8px 25px rgba(0,0,0,.15);display:flex;flex-direction:column;max-height:calc(100vh - 40px);margin:auto;overflow:hidden;border:1px solid rgba(255,255,255,.5)}
+.mh{background:var(--ht);color:#fff;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mh.und{background:#6b3a00}
+.mh h3{font-size:0.95rem;font-weight:700}
+.mh button{background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1;opacity:.7}
 .mh button:hover{opacity:1}
 .mb{display:grid;grid-template-columns:300px 1fr;flex:1;overflow:hidden;min-height:0}
-.mfc{
-  padding:22px;border-right:1px solid #eee;
-  overflow-y:auto;
-  display:flex;flex-direction:column;gap:16px;
-  background:#fafcfb
-}
-.mpc{display:flex;flex-direction:column;background:#eeeeee;overflow:hidden}
-.ptb{
-  padding:10px 18px;
-  background:#e0e4e0;border-bottom:1px solid #ccc;
-  font-size:.73rem;font-weight:700;color:#444;
-  text-transform:uppercase;letter-spacing:.8px;flex-shrink:0
-}
+.mfc{padding:20px;border-right:1px solid var(--b);overflow-y:auto;display:flex;flex-direction:column;gap:14px}
+.mpc{display:flex;flex-direction:column;background:#eef0ee;overflow:hidden}
+.ptb{padding:9px 16px;background:#e0e4e0;border-bottom:1px solid #ccc;font-size:0.73rem;font-weight:700;color:#555;text-transform:uppercase;letter-spacing:.6px;flex-shrink:0}
 .pb2{flex:1;overflow-y:auto;padding:20px}
-.kp{
-  background:#fff;
-  box-shadow:0 3px 16px rgba(0,0,0,.12);
-  border-radius:4px;
-  padding:32px 36px;
-  font-family:'Times New Roman',serif;
-  font-size:10.5pt;line-height:1.6;color:#111;
-  min-height:600px
-}
+.kp{background:#fff;box-shadow:0 3px 16px rgba(0,0,0,.15);border-radius:3px;padding:32px 36px;font-family:'Times New Roman',serif;font-size:10.5pt;line-height:1.6;color:#111;min-height:600px}
 .kp .kop{text-align:center;border-bottom:3px double #111;padding-bottom:10px;margin-bottom:14px}
 .kp .kop-nama{font-size:13.5pt;font-weight:bold;text-transform:uppercase}
 .kp .kop-sub{font-size:10pt}
@@ -431,163 +159,75 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--gr
 .kp .ttd-spasi{height:58px}
 .kp .ttd-nama{font-weight:bold;text-decoration:underline}
 .fg{display:flex;flex-direction:column;gap:5px}
-.fg label{font-size:.75rem;font-weight:700;color:var(--green-deep);text-transform:uppercase;letter-spacing:.5px}
-.fg input{
-  padding:9px 13px;
-  border:1.5px solid var(--border);border-radius:8px;
-  font-size:.88rem;font-family:inherit;
-  outline:none;transition:border-color .15s
-}
-.fg input:focus{border-color:var(--green-main)}
-.iw{
-  background:var(--green-light);
-  border-radius:10px;padding:14px 16px;
-  font-size:.82rem;line-height:1.6;
-  border-left:3px solid var(--green-main)
-}
-.iw strong{color:var(--green-deep);font-size:.9rem;display:block;margin-bottom:4px}
-.iw .tc2{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
-.ch3{background:#fff3cd;color:#7a5c00;padding:2px 9px;border-radius:8px;font-size:.73rem;font-weight:600}
+.fg label{font-size:0.77rem;font-weight:700;color:var(--ht);text-transform:uppercase;letter-spacing:.5px}
+.fg input{padding:8px 12px;border:1.5px solid var(--b);border-radius:7px;font-size:0.88rem;font-family:inherit;outline:none}
+.fg input:focus{border-color:var(--h)}
+.iw{background:var(--hm);border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:1.6;border-left:3px solid var(--h)}
+.iw strong{color:var(--ht);font-size:0.9rem}
+.iw .tc2{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.ch3{background:#fff3cd;color:#7a5c00;padding:2px 9px;border-radius:8px;font-size:0.75rem;font-weight:600}
 .ch3.tot{background:#fee2e2;color:#991b1b}
-.mf{
-  padding:14px 22px;
-  background:#f5f5f5;
-  border-top:1px solid #e5e5e5;
-  display:flex;gap:10px;justify-content:flex-end;
-  flex-shrink:0
-}
-.btl{background:#e5e5e5;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:.88rem;font-family:inherit;color:var(--text)}
-.bcf{background:var(--green-main);color:#fff;border:none;padding:9px 22px;border-radius:8px;cursor:pointer;font-size:.88rem;font-weight:700;font-family:inherit;display:flex;align-items:center;gap:7px}
-.bcf:hover{background:var(--green-deep)}
+.mf{padding:13px 22px;background:#f5f5f5;border-top:1px solid var(--b);display:flex;gap:10px;justify-content:flex-end;flex-shrink:0}
+.btl{background:#eee;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-size:0.88rem;font-family:inherit}
+.bcf{background:var(--h);color:#fff;border:none;padding:9px 20px;border-radius:8px;cursor:pointer;font-size:0.88rem;font-weight:700;font-family:inherit}
+.bcf:hover{background:var(--ht)}
 #print-area{display:none}
+@media print{body>*{display:none!important}#print-area{display:block!important}@page{margin:2cm;size:A4 portrait}.sc{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;page-break-after:always}.sc:last-child{page-break-after:avoid}.sc .kop{text-align:center;border-bottom:3px double black;padding-bottom:10px;margin-bottom:16px}.sc .kop-nama{font-size:14pt;font-weight:bold;text-transform:uppercase}.sc .kop-sub{font-size:11pt}.sc .judul{text-align:center;font-size:13pt;font-weight:bold;text-decoration:underline;text-transform:uppercase;margin:12px 0 4px}.sc .nomor{text-align:center;font-size:11pt;margin-bottom:18px}.sc .tbl2{border-collapse:collapse}.sc .tbl2 td{padding:2px 0;font-size:11pt;vertical-align:top}.sc .tbl2 td:nth-child(2){padding:0 8px}.sc .para{margin-bottom:12pt;font-size:11pt;text-align:justify}.sc .nominal{text-align:center;font-size:13pt;font-weight:bold;margin:12pt 0 4pt}.sc .nominal-kecil{text-align:center;font-size:10pt;color:#333;margin-bottom:14pt}.sc .ttd3{display:flex;justify-content:flex-end;margin-top:24pt}.sc .ttd-box{text-align:center;min-width:210px}.sc .ttd-jabatan{font-weight:bold}.sc .ttd-spasi{height:70pt}.sc .ttd-nama{font-weight:bold;text-decoration:underline}}
+@media(max-width:900px){.hbr{grid-template-columns:repeat(3,1fr)}.dg{grid-template-columns:repeat(3,1fr)}.cr{grid-template-columns:1fr}.mb{grid-template-columns:1fr}.mfc{border-right:none;border-bottom:1px solid var(--b);max-height:50vh}.mpc{max-height:50vh}}
+@media(max-width:600px){.hbr{grid-template-columns:1fr 1fr}.dg{grid-template-columns:repeat(2,1fr)}.nbt h1{font-size:0.8rem}.nv{padding:8px 16px;font-size:0.75rem}}
 
-/* ---- PRINT STYLES ---- */
-@media print{
-  body>*{display:none!important}#print-area{display:block!important}
-  @page{margin:2cm;size:A4 portrait}
-  .sc{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;page-break-after:always}
-  .sc:last-child{page-break-after:avoid}
-  .sc .kop{text-align:center;border-bottom:3px double black;padding-bottom:10px;margin-bottom:16px}
-  .sc .kop-nama{font-size:14pt;font-weight:bold;text-transform:uppercase}
-  .sc .kop-sub{font-size:11pt}
-  .sc .judul{text-align:center;font-size:13pt;font-weight:bold;text-decoration:underline;text-transform:uppercase;margin:12px 0 4px}
-  .sc .nomor{text-align:center;font-size:11pt;margin-bottom:18px}
-  .sc .tbl2{border-collapse:collapse}
-  .sc .tbl2 td{padding:2px 0;font-size:11pt;vertical-align:top}
-  .sc .tbl2 td:nth-child(2){padding:0 8px}
-  .sc .para{margin-bottom:12pt;font-size:11pt;text-align:justify}
-  .sc .nominal{text-align:center;font-size:13pt;font-weight:bold;margin:12pt 0 4pt}
-  .sc .nominal-kecil{text-align:center;font-size:10pt;color:#333;margin-bottom:14pt}
-  .sc .ttd3{display:flex;justify-content:flex-end;margin-top:24pt}
-  .sc .ttd-box{text-align:center;min-width:210px}
-  .sc .ttd-jabatan{font-weight:bold}.sc .ttd-spasi{height:70pt}.sc .ttd-nama{font-weight:bold;text-decoration:underline}
-  .surat-cetak{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;page-break-after:always}
-  .surat-cetak:last-child{page-break-after:avoid}
-  .surat-cetak .kop{text-align:center;border-bottom:3px double black;padding-bottom:10px;margin-bottom:16px}
-  .surat-cetak .kop-nama{font-size:14pt;font-weight:bold;text-transform:uppercase}
-  .surat-cetak .kop-sub{font-size:11pt}
-  .surat-cetak .judul{text-align:center;font-size:13pt;font-weight:bold;text-decoration:underline;text-transform:uppercase;margin:12px 0 4px}
-  .surat-cetak .nomor{text-align:center;font-size:11pt;margin-bottom:18px}
-  .surat-cetak .tbl2{border-collapse:collapse}
-  .surat-cetak .tbl2 td{padding:2px 0;font-size:11pt;vertical-align:top}
-  .surat-cetak .tbl2 td:nth-child(2){padding:0 8px}
-  .surat-cetak .para{margin-bottom:12pt;font-size:11pt;text-align:justify}
-  .surat-cetak .nominal{text-align:center;font-size:13pt;font-weight:bold;margin:12pt 0 4pt}
-  .surat-cetak .nominal-kecil{text-align:center;font-size:10pt;color:#333;margin-bottom:14pt}
-  .surat-cetak .ttd3{display:flex;justify-content:flex-end;margin-top:24pt}
-  .surat-cetak .ttd-box{text-align:center;min-width:210px}
-  .surat-cetak .ttd-jabatan{font-weight:bold}.surat-cetak .ttd-spasi{height:70pt}.surat-cetak .ttd-nama{font-weight:bold;text-decoration:underline}
-}
-
-/* ---- RESPONSIVE ---- */
-@media(max-width:900px){
-  .hbr{grid-template-columns:repeat(3,1fr)}
-  .dg{grid-template-columns:repeat(3,1fr)}
-  .cr{grid-template-columns:1fr}
-  .mb{grid-template-columns:1fr}
-  .mfc{border-right:none;border-bottom:1px solid #eee;max-height:50vh}
-  .mpc{max-height:50vh}
-}
-@media(max-width:600px){
-  .hbr{grid-template-columns:1fr 1fr}
-  .dg{grid-template-columns:repeat(2,1fr)}
-  .nbi{padding:0 14px}
-  .nv{padding:9px 14px;font-size:.75rem}
-  .nbt h1{font-size:.85rem}
-  .ha{letter-spacing:-1px}
-  .pd{padding:16px 14px 40px}
-  .hb{padding:28px 22px}
-}
+</style>
+</head>
 <body>
 
-<!-- =====================================================
-     NAVBAR - Professional Government Dashboard
-     ===================================================== -->
 <nav class="nb">
   <div class="nbi">
-    <div class="nbl">🏘️</div>
+    <div class="nbl">&#127968;&#65039;</div>
     <div class="nbt">
-      <h1>Dashboard PBB-P2</h1>
-      <p>Desa Kasomalang Kulon · Kec. Kasomalang, Kab. Subang</p>
+      <h1>Dashboard PBB-P2 - Desa Kasomalang Kulon</h1>
+      <p>Kecamatan Kasomalang, Kabupaten Subang - Tahun 2025</p>
     </div>
-    <div class="nbb">BAPENDA KAB. SUBANG · 2025</div>
+    <div class="nbb">BAPENDA 2025</div>
   </div>
   <div class="nt">
     <div class="nv ak" id="tab-dashboard" onclick="showPage('dashboard')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-      Dashboard
-      <span>Ringkasan &amp; Analisis</span>
+      &#128202; Dashboard <span>Analytics &amp; Ringkasan</span>
     </div>
     <div class="nv" id="tab-data" onclick="showPage('data')">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      Data Masyarakat
-      <span>Daftar Tunggakan</span>
+      &#128196; Data Masyarakat <span>Daftar Tunggakan</span>
     </div>
   </div>
 </nav>
 
-<!-- =====================================================
-     PAGE 1: DASHBOARD
-     ===================================================== -->
 <div class="pg ak" id="page-dashboard">
   <div class="pd">
 
-    <!-- Hero / Summary Banner -->
     <div class="hb">
-      <div class="hl">💰 Total Tunggakan PBB-P2 Tahun 2025</div>
+      <div class="hl">&#128176; Total Tunggakan PBB-P2 - Desa Kasomalang Kulon</div>
       <div class="ha" id="hero-total">Rp 0</div>
-      <div class="hs" id="hero-sub">Memuat data...</div>
-      <div class="hr" id="hero-rupiah"></div>
-      <div class="hbr" id="hero-breakdown"></div>
+            <div class="hs" id="hero-sub">Memuat...</div>
+            <div class="hr" id="hero-rupiah">Rp 0</div>
+            <div class="hbr" id="hero-breakdown"></div>
     </div>
 
-    <!-- Section: Ringkasan per Wilayah -->
-    <div class="st">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Ringkasan per Wilayah
-    </div>
+    <div class="st">&#128205; Ringkasan per Wilayah</div>
     <div class="dg" id="dusun-grid"></div>
 
-    <!-- Section: Charts -->
     <div class="cr">
       <div class="cc">
-        <div class="ct">Tunggakan per RW</div>
+        <div class="ct">&#128202; Total Tunggakan per RW</div>
         <div class="bc" id="chart-rw"></div>
       </div>
       <div class="cc">
-        <div class="ct">Tunggakan per Tahun</div>
+        <div class="ct">&#128197; Total Tunggakan per Tahun</div>
         <div class="bc" id="chart-year"></div>
       </div>
     </div>
 
-    <!-- Section: Top 10 -->
-    <div class="st">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      10 Warga dengan Tunggakan Terbesar
-    </div>
+    <div class="st">&#127941; 10 Warga dengan Tunggakan Terbesar</div>
     <div class="td">
       <div class="tdh">
-        <span>🏆 Pemuka Tunggakan</span>
+        <span>&#128081; Pemuka Tunggakan</span>
         <span id="top-count"></span>
       </div>
       <div class="tl" id="top-list"></div>
@@ -596,27 +236,19 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--gr
   </div>
 </div>
 
-<!-- =====================================================
-     PAGE 2: DATA MASYARAKAT
-     ===================================================== -->
 <div class="pg" id="page-data">
   <div class="pdm">
-
-    <!-- Filter Card -->
     <div class="pc">
-      <h2>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-        Cari &amp; Filter Data
-      </h2>
+      <h2>&#128269; Cari &amp; Filter Data Masyarakat</h2>
       <div class="fr">
         <input type="text" id="cari-nama" placeholder="Cari nama wajib pajak..." oninput="applyFilter()">
-        <input type="text" id="cari-nop" placeholder="Nomor SPPT / NOP..." oninput="applyFilter()">
+        <input type="text" id="cari-nop" placeholder="Cari Nomor SPPT / NOP..." oninput="applyFilter()">
         <select id="filter-dusun" onchange="onDusunSelect()">
           <option value="">Semua Wilayah</option>
           <option value="1">Dusun I (RW 01, 02)</option>
           <option value="2">Dusun II (RW 03, 06)</option>
           <option value="3">Dusun III (RW 04, 05, 07)</option>
-          <option value="4">Luar Desa (RW 0)</option>
+          <option value="4">Luar (RW 0)</option>
         </select>
         <select id="filter-rw" onchange="onRwSelect()"><option value="">Semua RW</option></select>
         <select id="filter-rt" onchange="applyFilter()"><option value="">Semua RT</option></select>
@@ -630,113 +262,78 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--gr
       <div class="fab" id="filter-active-bar" style="display:none"></div>
     </div>
 
-    <!-- Data Table -->
     <div class="pt">
       <div class="th">
-        <span>Daftar Wajib Pajak Belum Bayar</span>
-        <span id="hero-filter" style="color:var(--gold);font-weight:600;font-size:0.82rem"></span>
-        <div class="th-actions">
-          <span class="tt" id="info-terpilih">0 terpilih</span>
-          <button class="bc2 hijau" onclick="cetakBatch('pemberitahuan')">📋 Pemberitahuan</button>
-          <button class="bc2" onclick="cetakBatch('undangan')">✉️ Undangan</button>
-        </div>
-      </div>
+              <span>Daftar Wajib Pajak Belum Bayar</span>
+              <span id="hero-filter" style="color:var(--h);font-weight:600;font-size:0.8rem"></span>
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <span class="tt" id="info-terpilih">0 terpilih</span>
+                <button class="bc2 hijau" onclick="cetakBatch('pemberitahuan')">&#128196; Pemberitahuan</button>
+                <button class="bc2" onclick="cetakBatch('undangan')">&#9993; Undangan</button>
+              </div>
+            </div>
       <div class="ts">
         <table>
           <thead>
             <tr>
               <th><input type="checkbox" id="pilih-semua" onchange="pilihSemua(this)"></th>
-              <th>Nama Wajib Pajak</th>
-              <th>Nomor SPPT</th>
-              <th>RT/RW</th>
-              <th>Wilayah</th>
-              <th>Tahun Tunggakan</th>
-              <th>Total</th>
-              <th>Aksi</th>
+              <th>Nama Wajib Pajak</th><th>Nomor SPPT</th>
+              <th>RT/RW</th><th>Wilayah</th><th>Tahun Tunggakan</th>
+              <th>Total</th><th>Aksi</th>
             </tr>
           </thead>
           <tbody id="tbody-data"></tbody>
         </table>
       </div>
-      <div id="empty-state" class="es" style="display:none">🔍 Tidak ada data yang sesuai filter</div>
+      <div id="empty-state" class="es" style="display:none">&#128270; Tidak ada data yang sesuai</div>
       <div class="pg2" id="pagination"></div>
     </div>
-
   </div>
 </div>
 
-<!-- =====================================================
-     MODAL: SURAT PEMBERITAHUAN
-     ===================================================== -->
+<!-- MODAL PEMBERITAHUAN -->
 <div class="ov" id="modal-pb"><div class="md">
-  <div class="mh">
-    <h3>📋 Surat Pemberitahuan PBB-P2</h3>
-    <button onclick="tutupModal('pb')">×</button>
-  </div>
+  <div class="mh"><h3>&#128196; Surat Pemberitahuan PBB-P2</h3><button onclick="tutupModal('pb')">x</button></div>
   <div class="mb">
     <div class="mfc">
       <div class="iw" id="iwb-pb"></div>
-      <div class="fg">
-        <label>Nomor Surat</label>
-        <input type="text" id="pb-nomor" value="001" oninput="rerender('pb')">
-      </div>
-      <div class="fg">
-        <label>Alamat Wajib Pajak</label>
-        <input type="text" id="pb-alamat" placeholder="Kp. ..., RT .../RW ..., Desa Kasomalang Kulon" oninput="rerender('pb')">
-      </div>
+      <div class="fg"><label>Nomor Surat</label><input type="text" id="pb-nomor" value="001" oninput="rerender('pb')"></div>
+      <div class="fg"><label>Alamat Wajib Pajak</label><input type="text" id="pb-alamat" placeholder="Kp. ..., RT .../RW ..." oninput="rerender('pb')"></div>
     </div>
     <div class="mpc">
-      <div class="ptb">👁️ Preview Surat</div>
+      <div class="ptb">&#128065; Preview Surat</div>
       <div class="pb2"><div class="kp" id="prev-pb"></div></div>
     </div>
   </div>
   <div class="mf">
     <button class="btl" onclick="tutupModal('pb')">Batal</button>
-    <button class="bcf" onclick="docetak('pb')">🖨️ Cetak Surat</button>
+    <button class="bcf" onclick="docetak('pb')">&#128424; Cetak Surat</button>
   </div>
 </div></div>
 
-<!-- =====================================================
-     MODAL: SURAT UNDANGAN
-     ===================================================== -->
+<!-- MODAL UNDANGAN -->
 <div class="ov" id="modal-und"><div class="md">
-  <div class="mh und">
-    <h3>✉️ Surat Undangan PBB-P2</h3>
-    <button onclick="tutupModal('und')">×</button>
-  </div>
+  <div class="mh und"><h3>&#9993; Surat Undangan PBB-P2</h3><button onclick="tutupModal('und')">x</button></div>
   <div class="mb">
     <div class="mfc">
       <div class="iw" id="iwb-und"></div>
-      <div class="fg">
-        <label>Nomor Surat</label>
-        <input type="text" id="und-nomor" value="001" oninput="rerender('und')">
-      </div>
-      <div class="fg">
-        <label>Alamat Wajib Pajak</label>
-        <input type="text" id="und-alamat" placeholder="Kp. ..." oninput="rerender('und')">
-      </div>
-      <div class="fg">
-        <label>Hari / Tanggal Undangan</label>
-        <input type="text" id="und-hari" placeholder="Senin, 16 Juni 2025" oninput="rerender('und')">
-      </div>
-      <div class="fg">
-        <label>Waktu</label>
-        <input type="text" id="und-waktu" value="09.00 WIB" oninput="rerender('und')">
-      </div>
+      <div class="fg"><label>Nomor Surat</label><input type="text" id="und-nomor" value="001" oninput="rerender('und')"></div>
+      <div class="fg"><label>Alamat Wajib Pajak</label><input type="text" id="und-alamat" placeholder="Kp. ..." oninput="rerender('und')"></div>
+      <div class="fg"><label>Hari / Tanggal</label><input type="text" id="und-hari" placeholder="Senin, 16 Juni 2025" oninput="rerender('und')"></div>
+      <div class="fg"><label>Waktu</label><input type="text" id="und-waktu" value="09.00 WIB" oninput="rerender('und')"></div>
     </div>
     <div class="mpc">
-      <div class="ptb">👁️ Preview Surat</div>
+      <div class="ptb">&#128065; Preview Surat</div>
       <div class="pb2"><div class="kp" id="prev-und"></div></div>
     </div>
   </div>
   <div class="mf">
     <button class="btl" onclick="tutupModal('und')">Batal</button>
-    <button class="bcf" onclick="docetak('und')">🖨️ Cetak Surat</button>
+    <button class="bcf" onclick="docetak('und')">&#128424; Cetak Surat</button>
   </div>
 </div></div>
 
-<div id="print-area"></div>
-
+<div id="print-area"></di
 <script>
 
 var DPRINT = true;
@@ -792,6 +389,32 @@ function updateHeroRupiah() {
     setTimeout(() => animateCounter(document.getElementById('hero-rupiah'), total, true, 800), 50);
   }
 }
+
+function getDusun(rw) {
+  if (rw === '0') return 4; // Luar
+  if (DUSUN_RW[1].includes(rw)) return 1;
+  if (DUSUN_RW[2].includes(rw)) return 2;
+  if (DUSUN_RW[3].includes(rw)) return 3;
+  return 0;
+}
+
+function getDusunLabel(rw) {
+  const d = getDusun(rw);
+  if (d === 4) return 'Luar';
+  return d ? 'Dusun ' + ['','I','II','III'][d] : '—';
+}
+
+function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+function autoAlamat(d) {
+  return d.rt !== '0'
+    ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon`
+    : 'Desa Kasomalang Kulon';
+}
+
+function tgl() { return '11 Juni 2026'; }
+
+function nomorFmt(s) { return String(parseInt(s)||1).padStart(3,'0'); }
 
 function animateCounter(el, target, isRupiah, duration) {
   const start = performance.now();
@@ -1005,18 +628,18 @@ function bukaModal(tipe, idx) {
   if (tipe === 'pb') {
     document.getElementById('iwb-pb').innerHTML = infoHtml;
     document.getElementById('pb-alamat').value = autoAlamat(curData);
-    document.getElementById('modal-pb').classList.add('ak');
+    document.getElementById('modal-pb').classList.add('aktif');
     rerender('pb');
   } else {
     document.getElementById('iwb-und').innerHTML = infoHtml;
     document.getElementById('und-alamat').value = autoAlamat(curData);
-    document.getElementById('modal-und').classList.add('ak');
+    document.getElementById('modal-und').classList.add('aktif');
     rerender('und');
   }
 }
 
 function tutupModal(tipe) {
-  document.getElementById('modal-'+tipe).classList.remove('ak');
+  document.getElementById('modal-'+tipe).classList.remove('aktif');
 }
 
 function rerender(tipe) {
@@ -1140,24 +763,21 @@ function cetakBatch(tipe) {
     document.getElementById('iwb-pb').innerHTML = `<strong>${jumlah} surat pemberitahuan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi.</span>`;
     document.getElementById('pb-alamat').value = autoAlamat(curData);
     document.getElementById('prev-pb').innerHTML = htmlPemberitahuan(curData, document.getElementById('pb-nomor').value, autoAlamat(curData));
-    document.getElementById('modal-pb').classList.add('ak');
+    document.getElementById('modal-pb').classList.add('aktif');
   } else {
     document.getElementById('iwb-und').innerHTML = `<strong>${jumlah} surat undangan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi. Hari/tanggal berlaku untuk semua.</span>`;
     document.getElementById('und-alamat').value = autoAlamat(curData);
     document.getElementById('prev-und').innerHTML = htmlUndangan(curData, document.getElementById('und-nomor').value, autoAlamat(curData), document.getElementById('und-hari').value||'..............................', document.getElementById('und-waktu').value);
-    document.getElementById('modal-und').classList.add('ak');
+    document.getElementById('modal-und').classList.add('aktif');
   }
 }
 
 // ===== PAGE NAVIGATION =====
 function showPage(page) {
-  // Use inline display to avoid CSS stylesheet specificity issues
-  document.querySelectorAll('.pg').forEach(function(p){p.style.display='none'});
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('ak')});
   document.querySelectorAll('.nv').forEach(function(t){t.classList.remove('ak')});
-  var target = document.getElementById('page-' + page);
-  if (target) target.style.display = 'block';
-  var tab = document.getElementById('tab-' + page);
-  if (tab) tab.classList.add('ak');
+  document.getElementById('page-' + page).classList.add('ak');
+  document.getElementById('tab-' + page).classList.add('ak');
   if (page === 'dashboard') {
     initDashboard();
   } else {
@@ -1301,9 +921,6 @@ function gotoData(d) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // Initialize page visibility states
-  document.getElementById('page-dashboard').style.display = 'block';
-  document.getElementById('page-data').style.display = 'none';
   initDashboard();
   applyFilter();
 });

@@ -89,9 +89,7 @@ a{text-decoration:none;color:inherit}
 .nv.ak span{opacity:.8}
 
 /* ---- PAGE SYSTEM ---- */
-#page-dashboard,#page-data{display:none}
-.pg{display:none !important}
-.pg.ak,#page-dashboard.ak,#page-data.ak{display:block !important}
+.pg{display:none}.pg.ak{display:block}
 .pd{max-width:1200px;margin:0 auto;padding:28px 24px 48px}
 
 /* ---- HERO SECTION ---- */
@@ -481,22 +479,6 @@ input[type=checkbox]{width:15px;height:15px;cursor:pointer;accent-color:var(--gr
   .sc .ttd3{display:flex;justify-content:flex-end;margin-top:24pt}
   .sc .ttd-box{text-align:center;min-width:210px}
   .sc .ttd-jabatan{font-weight:bold}.sc .ttd-spasi{height:70pt}.sc .ttd-nama{font-weight:bold;text-decoration:underline}
-  .surat-cetak{font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;page-break-after:always}
-  .surat-cetak:last-child{page-break-after:avoid}
-  .surat-cetak .kop{text-align:center;border-bottom:3px double black;padding-bottom:10px;margin-bottom:16px}
-  .surat-cetak .kop-nama{font-size:14pt;font-weight:bold;text-transform:uppercase}
-  .surat-cetak .kop-sub{font-size:11pt}
-  .surat-cetak .judul{text-align:center;font-size:13pt;font-weight:bold;text-decoration:underline;text-transform:uppercase;margin:12px 0 4px}
-  .surat-cetak .nomor{text-align:center;font-size:11pt;margin-bottom:18px}
-  .surat-cetak .tbl2{border-collapse:collapse}
-  .surat-cetak .tbl2 td{padding:2px 0;font-size:11pt;vertical-align:top}
-  .surat-cetak .tbl2 td:nth-child(2){padding:0 8px}
-  .surat-cetak .para{margin-bottom:12pt;font-size:11pt;text-align:justify}
-  .surat-cetak .nominal{text-align:center;font-size:13pt;font-weight:bold;margin:12pt 0 4pt}
-  .surat-cetak .nominal-kecil{text-align:center;font-size:10pt;color:#333;margin-bottom:14pt}
-  .surat-cetak .ttd3{display:flex;justify-content:flex-end;margin-top:24pt}
-  .surat-cetak .ttd-box{text-align:center;min-width:210px}
-  .surat-cetak .ttd-jabatan{font-weight:bold}.surat-cetak .ttd-spasi{height:70pt}.surat-cetak .ttd-nama{font-weight:bold;text-decoration:underline}
 }
 
 /* ---- RESPONSIVE ---- */
@@ -793,6 +775,32 @@ function updateHeroRupiah() {
   }
 }
 
+function getDusun(rw) {
+  if (rw === '0') return 4; // Luar
+  if (DUSUN_RW[1].includes(rw)) return 1;
+  if (DUSUN_RW[2].includes(rw)) return 2;
+  if (DUSUN_RW[3].includes(rw)) return 3;
+  return 0;
+}
+
+function getDusunLabel(rw) {
+  const d = getDusun(rw);
+  if (d === 4) return 'Luar';
+  return d ? 'Dusun ' + ['','I','II','III'][d] : '—';
+}
+
+function rp(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
+
+function autoAlamat(d) {
+  return d.rt !== '0'
+    ? `Kp. Kasomalang Kulon RT ${d.rt}/RW ${d.rw}, Desa Kasomalang Kulon`
+    : 'Desa Kasomalang Kulon';
+}
+
+function tgl() { return '11 Juni 2026'; }
+
+function nomorFmt(s) { return String(parseInt(s)||1).padStart(3,'0'); }
+
 function animateCounter(el, target, isRupiah, duration) {
   const start = performance.now();
   const startVal = 0;
@@ -1005,18 +1013,18 @@ function bukaModal(tipe, idx) {
   if (tipe === 'pb') {
     document.getElementById('iwb-pb').innerHTML = infoHtml;
     document.getElementById('pb-alamat').value = autoAlamat(curData);
-    document.getElementById('modal-pb').classList.add('ak');
+    document.getElementById('modal-pb').classList.add('aktif');
     rerender('pb');
   } else {
     document.getElementById('iwb-und').innerHTML = infoHtml;
     document.getElementById('und-alamat').value = autoAlamat(curData);
-    document.getElementById('modal-und').classList.add('ak');
+    document.getElementById('modal-und').classList.add('aktif');
     rerender('und');
   }
 }
 
 function tutupModal(tipe) {
-  document.getElementById('modal-'+tipe).classList.remove('ak');
+  document.getElementById('modal-'+tipe).classList.remove('aktif');
 }
 
 function rerender(tipe) {
@@ -1140,24 +1148,21 @@ function cetakBatch(tipe) {
     document.getElementById('iwb-pb').innerHTML = `<strong>${jumlah} surat pemberitahuan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi.</span>`;
     document.getElementById('pb-alamat').value = autoAlamat(curData);
     document.getElementById('prev-pb').innerHTML = htmlPemberitahuan(curData, document.getElementById('pb-nomor').value, autoAlamat(curData));
-    document.getElementById('modal-pb').classList.add('ak');
+    document.getElementById('modal-pb').classList.add('aktif');
   } else {
     document.getElementById('iwb-und').innerHTML = `<strong>${jumlah} surat undangan</strong> akan dicetak.<br><span style="font-size:.8rem;color:#555;">Nomor surat dimulai dari nomor yang diisi. Hari/tanggal berlaku untuk semua.</span>`;
     document.getElementById('und-alamat').value = autoAlamat(curData);
     document.getElementById('prev-und').innerHTML = htmlUndangan(curData, document.getElementById('und-nomor').value, autoAlamat(curData), document.getElementById('und-hari').value||'..............................', document.getElementById('und-waktu').value);
-    document.getElementById('modal-und').classList.add('ak');
+    document.getElementById('modal-und').classList.add('aktif');
   }
 }
 
 // ===== PAGE NAVIGATION =====
 function showPage(page) {
-  // Use inline display to avoid CSS stylesheet specificity issues
-  document.querySelectorAll('.pg').forEach(function(p){p.style.display='none'});
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('ak')});
   document.querySelectorAll('.nv').forEach(function(t){t.classList.remove('ak')});
-  var target = document.getElementById('page-' + page);
-  if (target) target.style.display = 'block';
-  var tab = document.getElementById('tab-' + page);
-  if (tab) tab.classList.add('ak');
+  document.getElementById('page-' + page).classList.add('ak');
+  document.getElementById('tab-' + page).classList.add('ak');
   if (page === 'dashboard') {
     initDashboard();
   } else {
@@ -1301,9 +1306,6 @@ function gotoData(d) {
 }
 
 window.addEventListener('DOMContentLoaded', function() {
-  // Initialize page visibility states
-  document.getElementById('page-dashboard').style.display = 'block';
-  document.getElementById('page-data').style.display = 'none';
   initDashboard();
   applyFilter();
 });
